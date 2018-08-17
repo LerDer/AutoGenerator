@@ -10,8 +10,6 @@ import $!{import};
  *
  * User: ${user}
  * Date: ${today}
- * Generate by ${autoName}
- * Powered by duxing@Taobao
  */
 
 public class ${className}#if($pagerQuery) extends BaseQuery#else implements Serializable#end{
@@ -23,17 +21,14 @@ public class ${className}#if($pagerQuery) extends BaseQuery#else implements Seri
      */
     private ${column.type} ${column.property};
 #end
-
 #foreach($!{column} in $!{columnList})
-    /**
-     * ${column.property} getter & setter
-     */
+
     public ${column.type} get${column.key}() {
         return ${column.property};
     }
+
     public void set${column.key}(${column.type} ${column.property}){
         this.${column.property} = ${column.property};
     }
-
 #end
 }
