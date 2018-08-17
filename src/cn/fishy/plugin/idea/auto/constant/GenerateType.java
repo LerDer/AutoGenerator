@@ -8,11 +8,11 @@ import cn.fishy.plugin.idea.auto.storage.Env;
  */
 
 public enum GenerateType {
-    DO("DO","DO","dal/dataobject/","dal.dataobject",TypePath.SRC),
+    DO("","","dal/dataobject/","dal.dataobject",TypePath.SRC),
     BO("BO","BO","bo/","bo",TypePath.SRC),
     Query("Query","Query","dal/query/","dal.query",TypePath.SRC),
-    SQLMap("SQLMap","_sqlmap","dal/sqlmap/","dal.dataobject",TypePath.RESOURCES),
-    DAO("DAO","DAO","dal/dao/","dal.dao",TypePath.SRC),
+    SQLMap("Mapper","Mapper","dal/sqlmap/","dal.dataobject",TypePath.RESOURCES),
+    DAO("Mapper","Mapper","dal/dao/","dal.dao",TypePath.SRC),
     DAOImpl("DAOImpl","DAOImpl","dal/dao/impl/","dal.dao.impl",TypePath.SRC),
     Manager("Manager","Manager","manager/","manager",TypePath.SRC),
     ManagerImpl("ManagerImpl","ManagerImpl","manager/impl/","manager.impl",TypePath.SRC),
