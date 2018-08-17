@@ -8,19 +8,16 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.taobao.tddl.client.sequence.Sequence;
 
 /**
  * BaseDAO
  * Date: ${today}
- * Generate by autoBaseDAO
- * Powered by duxing@Taobao
  */
 public class BaseDAO implements InitializingBean {
 
     protected SqlMapClientTemplate sqlMapClient;
 
-    protected Map<String, Sequence> sequenceTable;
+    protected Map<String, Object> sequenceTable;
 
     protected JdbcTemplate jdbcTemplate;
 
@@ -35,7 +32,7 @@ public class BaseDAO implements InitializingBean {
     }
 
 
-    public void setSequenceTable(Map<String, Sequence> sequenceTable) {
+    public void setSequenceTable(Map<String, Object> sequenceTable) {
         this.sequenceTable = sequenceTable;
     }
 
@@ -43,15 +40,12 @@ public class BaseDAO implements InitializingBean {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    /**
-     * 此处有个约定, sequence 的配置需要是 表名_sequence 作为sequenceTable的 key
-     */
     protected Long getNextId(String idKey) throws Exception {
         if (idKey == null) throw new IllegalArgumentException("idKey can not be null");
-        Sequence sequence = sequenceTable.get(idKey + "_sequence");
-        if (sequence == null) throw new IllegalStateException(idKey + "'s sequence not found");
+        Object Object = sequenceTable.get(idKey + "_sequence");
+        if (Object == null) throw new IllegalStateException(idKey + "'s Object not found");
         try {
-            return sequence.nextValue();
+            return Object.nextValue();
         } catch (Exception e) {
             throw new Exception("[BaseDAO-getNextId]", e);
         }
@@ -105,9 +99,8 @@ public class BaseDAO implements InitializingBean {
      * @param pageNo 页次
      * @param pageSize 每页记录数
      * @return list
-     * @throws Exception exception
      */
-    public List<?> queryForList(String statementName, Object parameterObject, int pageNo, int pageSize) throws Exception {
+    public List<?> queryForList(String statementName, Object parameterObject, int pageNo, int pageSize) {
         try {
             return sqlMapClient.queryForList(statementName, parameterObject, pageSize * (pageNo - 1), pageSize);
         } catch (DataAccessException e) {
@@ -115,7 +108,7 @@ public class BaseDAO implements InitializingBean {
         }
     }
 
-    public Map<?, ?> queryForMap(String statementName, Object parameterObject, String keyProperty) throws Exception {
+    public Map<?, ?> queryForMap(String statementName, Object parameterObject, String keyProperty) {
         try {
             return sqlMapClient.queryForMap(statementName, parameterObject, keyProperty);
         } catch (DataAccessException e) {
