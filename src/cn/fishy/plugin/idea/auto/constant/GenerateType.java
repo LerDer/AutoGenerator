@@ -20,7 +20,7 @@ public enum GenerateType {
     BaseDAO("BaseDAO","BaseDAO","dal/dao/","dal.dao",TypePath.SRC),
     BaseQuery("BaseQuery","BaseQuery","dal/query/","dal.query",TypePath.SRC),
     DAOXml("DAO.Xml","dao-sample","dal/","dal.dao.impl",TypePath.RESOURCES),
-    SQLMapConfigXml("SQLMap-Config.Xml","sqlmap-config-sample","dal/","dal",TypePath.RESOURCES),
+    SQLMapConfigXml("Mapper.Xml","Mapper","dal/","dal",TypePath.RESOURCES),
     PersistenceXml("Persistence.Xml","persistence-sample","dal/","dal.dao",TypePath.RESOURCES),
     ALL("All","All","","",null);
     private String name;

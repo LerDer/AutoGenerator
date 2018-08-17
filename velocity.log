@@ -62,3 +62,53 @@
 2016-05-04 18:09:42,153 - Null reference [template '', line 11, column 10] : ${user} cannot be resolved.
 2016-05-04 18:09:42,153 - Null reference [template '', line 12, column 10] : ${today} cannot be resolved.
 2016-05-04 18:09:42,153 - Null reference [template '', line 13, column 16] : ${autoName} cannot be resolved.
+2018-08-18 00:19:45,635 - Log4JLogChute initialized using file 'velocity.log'
+2018-08-18 00:19:45,638 - Initializing Velocity, Calling init()...
+2018-08-18 00:19:45,638 - Starting Apache Velocity v1.7 (compiled: 2010-11-19 12:14:37)
+2018-08-18 00:19:45,638 - Default Properties File: org/apache/velocity/runtime/defaults/velocity.properties
+2018-08-18 00:19:45,638 - Trying to use logger class org.apache.velocity.runtime.log.AvalonLogChute
+2018-08-18 00:19:45,638 - Target log system for org.apache.velocity.runtime.log.AvalonLogChute is not available (java.lang.NoClassDefFoundError: org/apache/log/format/Formatter).  Falling back to next log system...
+2018-08-18 00:19:45,638 - Trying to use logger class org.apache.velocity.runtime.log.Log4JLogChute
+2018-08-18 00:19:45,638 - Using logger class org.apache.velocity.runtime.log.Log4JLogChute
+2018-08-18 00:19:45,643 - ResourceLoader instantiated: org.apache.velocity.runtime.resource.loader.FileResourceLoader
+2018-08-18 00:19:45,644 - Do unicode file recognition:  false
+2018-08-18 00:19:45,644 - FileResourceLoader : adding path '.'
+2018-08-18 00:19:45,654 - ResourceCache: initialized (class org.apache.velocity.runtime.resource.ResourceCacheImpl) with class java.util.Collections$SynchronizedMap cache map.
+2018-08-18 00:19:45,655 - Loaded System Directive: org.apache.velocity.runtime.directive.Stop
+2018-08-18 00:19:45,656 - Loaded System Directive: org.apache.velocity.runtime.directive.Define
+2018-08-18 00:19:45,657 - Loaded System Directive: org.apache.velocity.runtime.directive.Break
+2018-08-18 00:19:45,657 - Loaded System Directive: org.apache.velocity.runtime.directive.Evaluate
+2018-08-18 00:19:45,658 - Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+2018-08-18 00:19:45,659 - Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+2018-08-18 00:19:45,660 - Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+2018-08-18 00:19:45,663 - Loaded System Directive: org.apache.velocity.runtime.directive.Include
+2018-08-18 00:19:45,664 - Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+2018-08-18 00:19:45,697 - Created '20' parsers.
+2018-08-18 00:19:45,701 - Velocimacro : "velocimacro.library" is not set.  Trying default library: VM_global_library.vm
+2018-08-18 00:19:45,701 - Velocimacro : Default library not found.
+2018-08-18 00:19:45,701 - Velocimacro : allowInline = true : VMs can be defined inline in templates
+2018-08-18 00:19:45,701 - Velocimacro : allowInlineToOverride = false : VMs defined inline may NOT replace previous VM definitions
+2018-08-18 00:19:45,701 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2018-08-18 00:19:45,701 - Velocimacro : autoload off : VM system will not automatically reload global library macros
+2018-08-18 00:19:45,758 - Null reference [template '', line 4, column 20] : ${daoClassName} cannot be resolved.
+2018-08-18 00:19:45,758 - Null reference [template '', line 6, column 36] : ${package} cannot be resolved.
+2018-08-18 00:19:45,758 - Null reference [template '', line 6, column 47] : ${doClassName} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 20, column 41] : ${package} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 20, column 52] : ${doClassName} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 21, column 25] : ${tableName} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 33, column 33] : ${primaryKeyColumn.type} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 33, column 72] : ${primaryKeyColumn.property} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 34, column 34] : ${primaryKeyColumn.name} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 40, column 16] : ${tableName} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 40, column 81] : ${primaryKeyColumn.name} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 40, column 110] : ${primaryKeyColumn.property} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 50, column 15] : ${primaryKeyColumn.name} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 50, column 44] : ${primaryKeyColumn.property} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 56, column 14] : ${tableName} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 56, column 33] : ${primaryKeyColumn.name} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 56, column 62] : ${primaryKeyColumn.property} cannot be resolved.
+2018-08-18 00:19:45,759 - Null reference [template '', line 62, column 14] : ${tableName} cannot be resolved.
+2018-08-18 00:19:45,760 - Null reference [template '', line 84, column 14] : ${tableName} cannot be resolved.
+2018-08-18 00:19:45,760 - Null reference [template '', line 105, column 21] : ${tableName} cannot be resolved.
+2018-08-18 00:19:45,760 - Null reference [template '', line 105, column 41] : ${primaryKeyColumn.name} cannot be resolved.
+2018-08-18 00:19:45,760 - Null reference [template '', line 105, column 70] : ${primaryKeyColumn.property} cannot be resolved.
