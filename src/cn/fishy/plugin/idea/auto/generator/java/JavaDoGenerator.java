@@ -18,6 +18,7 @@ import java.util.Map;
  */
 public class JavaDoGenerator extends BaseGenerator implements DoGenerator {
 
+    @Override
     public String generate(String className, List<Column> columnList) {
         Map<String,Object> map = initMap();
         map.put("className",className);

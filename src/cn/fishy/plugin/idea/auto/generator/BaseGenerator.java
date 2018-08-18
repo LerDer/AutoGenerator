@@ -23,11 +23,11 @@ import java.util.Map;
  */
 public abstract class BaseGenerator {
 
-    public static List<String> deleteKeyList = new ArrayList<String>();
+    protected static List<String> deleteKeyList = new ArrayList<>();
     static{
-        deleteKeyList.add("IS_DELETE");
-        deleteKeyList.add("IS_DELETED");
-        deleteKeyList.add("DELETED");
+        deleteKeyList.add("is_delete");
+        deleteKeyList.add("is_deleted");
+        deleteKeyList.add("deleted");
     }
 
     public String generate() {
@@ -51,12 +51,12 @@ public abstract class BaseGenerator {
 
     public abstract GenerateType generateType();
 
-    public List<String> getImportList(List<Column> columnList, boolean objectClass) {
+    protected List<String> getImportList(List<Column> columnList, boolean objectClass) {
         return getImportList(columnList,objectClass,false);
     }
 
-    public List<String> getImportList(List<Column> columnList, boolean objectClass, boolean addList) {
-        List<String> importList = new ArrayList<String>();
+    protected List<String> getImportList(List<Column> columnList, boolean objectClass, boolean addList) {
+        List<String> importList = new ArrayList<>();
         if(objectClass){
             importList.add("java.io.Serializable");
         }
@@ -87,14 +87,14 @@ public abstract class BaseGenerator {
         return getImportList(column,objectClass,false);
     }
 
-    public List<String> getImportList(Column column, boolean objectClass, boolean addList) {
-        List<Column> l = new ArrayList<Column>();
+    protected List<String> getImportList(Column column, boolean objectClass, boolean addList) {
+        List<Column> l = new ArrayList<>();
         l.add(column);
         return getImportList(l,objectClass,addList);
     }
 
     public Map<String,Object> initMap(){
-        Map<String,Object> map = new HashMap<String, Object>();
+        Map<String,Object> map = new HashMap<>();
         Setting setting = SettingManager.get();
         map.put("user",setting.getAuthor());
         map.put("autoName","auto"+ generateType().getName());

@@ -521,6 +521,7 @@ public class GeneratorMainDialog extends JDialog {
 
         boolean r = false;
         String rs = "";
+        // lww: 生成入口
         switch(gt){
             case DO:
                 r =generatorAdaptor.generateDO();
