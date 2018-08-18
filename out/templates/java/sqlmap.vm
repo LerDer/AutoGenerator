@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${daoClassName}">
+
+    <resultMap id="baseMap" class="${package}.${doClassName}">
+#foreach($!{column} in $!{columnList})
+        <result property="${column.property}" column="${column.name}"/>
+#end
+    </resultMap>
+
+    <sql id="base_column">
+#set($i = 0)
+#foreach($!{column} in $!{columnList})
+        ${column.name}#if($i == $!{columnList.size}) #else,#end
+#set($i = $i + 1)
+#end
+    </sql>
+
+    <insert id="insert" parameterClass="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="id">
+	    INSERT INTO ${tableName} (
+        <include refid="base_column"/>
+        )VALUES(
+#set($i = 0)
+#foreach($!{column} in $!{columnList})
+      #if("$column.name"=="gmt_modified" || "$column.name"=="gmt_create"|| "$column.name"=="gmt_created")now()#elseif("$column.name"=="is_deleted" ||  "$column.name"=="deleted") 0 #else#{${column.property}}#if($i == $!{columnList.size}) #else,#end
+#end
+#set($i = $i + 1)
+#end
+        )
+
+#if($daoUseSequence)#else
+        <selectKey resultClass="${primaryKeyColumn.type}" keyProperty="${primaryKeyColumn.property}" >
+            SELECT @@IDENTITY AS ${primaryKeyColumn.name}
+        </selectKey>
+#end
+    </insert>
+
+    <update id="update">
+        UPDATE ${tableName} SET #if($haveGmtModified) gmt_modified = now()#else ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
+#end
+#foreach($!{column} in $!{columnList})
+#if("$column.name"=="gmt_modified"||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name")
+#else
+    <if test="${column.property} != null">
+                ${column.name} = #{${column.property}},
+            </if>
+#end
+#end
+        WHERE ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
+    </update>
+
+    <select id="select" resultMap="baseMap">
+        SELECT
+        <include refid="base_column"/>
+        FROM ${tableName} WHERE ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
+    </select>
+
+    <select id="queryList" resultMap="baseMap">
+        SELECT
+        <include refid="base_column"/>
+        FROM ${tableName}
+        <where>
+            #if($haveIsDeleted) is_deleted = 0 #elseif($!haveDeleted) deleted = 0 #else
+#end
+#foreach($!{column} in $!{columnQueryList})
+#if("$column.name"=="is_deleted"||"$column.name"=="deleted"||"$column.name"=="gmt_modified"||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name")
+#else
+            <if test= "${column.property} != null">
+                AND ${column.name} = #{${column.property}}
+            </if>
+#end
+#end
+        </where>
+#if($pagerQuery)
+        ORDER BY ${primaryKeyColumn.name} DESC
+        LIMIT #{startRow}, #{limit}
+#end
+    </select>
+
+    <select id="queryCount" resultClass="int">
+        SELECT
+        COUNT(1)
+        FROM ${tableName}
+        <where>
+            #if($haveIsDeleted) is_deleted = 0 #elseif($!haveDeleted) deleted = 0 #else
+            #end
+            #foreach($!{column} in $!{columnQueryList})
+                #if("$column.name"=="is_deleted"||"$column.name"=="deleted"||"$column.name"=="gmt_modified"||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name")
+                #else
+                    <if test= "${column.property} != null">
+                        AND ${column.name} = #{${column.property}}
+                    </if>
+                #end
+            #end
+        </where>
+    </select>
+
+#if($daoLogDelete)
+    <update id="delete">
+        UPDATE ${tableName} SET ${deleteKey} = '1' WHERE ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
+    </update>
+#else
+    <delete id="delete">
+        DELETE FROM ${tableName}  WHERE ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
+    </delete>
+#end
+
+</mapper>
