@@ -1,40 +1,14 @@
 <idea-plugin version="2">
   <id>com.fishy.plugin.idea.auto</id>
   <name>Auto Generator</name>
-  <version>1.1.0</version>
-  <vendor email="i17c.net@gmail.com" url="http://weibo.com/dxkkk">独行</vendor>
+  <version>1.1.1</version>
+  <vendor>lww</vendor>
 
-  <description><![CDATA[
-      Auto Generator
-      <br><br>It's a tool for auto generate Data Persistence Layer by Create Table SQL.
-      <br><br>What is "Data Persistence Layer", just contain DO, Query, DAO, Manager, And sqlmap ...
-      <br><br>I designed it just for java and scala . other languages maybe later ...
-      <br><br>The generate code will use ibatis and <a href="https://github.com/alibaba/tb_tddl" target="_blank">tddl</a> to access database.
-      <br><br>If you don't like, change it your self. of course, you also can send other framework to me .
-      <br><br>This tool will appeared at "Tools" menu and "Go To" menu,  shortcut key is: ctrl+shift+\
-      <br><br>jdk1.7 for 1.0.0, jdk1.6 for 1.0.1 and later.
-      <br><br>If you download slow here, please go <a href="https://github.com/i17c/AutoGenerator/tree/master/releases">https://github.com/i17c/AutoGenerator/tree/master/releases</a>
-      <br>
-      <br>
-      <br>Auto Generator
-      <br><br>本工具根据建表语句自动创建数据持久层.
-      <br><br>数据持久层包含DO, Query, DAO, Manager, sqlmap 等
-      <br><br>本工具只设计为生成java和scala代码, 也许以后也会有更多的代码支持
+  <description>
+      Auto Generator 暂时修改了domain, dao, mapper
+      </description>
 
-    ]]></description>
-
-  <change-notes><![CDATA[
-      2016.5.5. v1.1.0 upgrade template engine to velocity and custom template<br>
-      2016.1.23. v1.0.8 persistent the sql in project config<br>
-      2016.1.12. v1.0.7 fix text sql line analy<br>
-      2016.1.6. v1.0.6 fix path exception & comment null exception<br>
-      2015.12.30. v1.0.5 fix column null bug<br>
-      2015.12.1.  v1.0.4 add freemarker<br>
-      2015.9.11.  v1.0.3 fix errors for analy column which have no sign `<br>
-      2015.9.1.  v1.0.2 fix errors for analy type decimal(2,3) ...<br>
-      2015.8.25. v1.0.1 support for jdk1.6, 1.0.0 may use at jdk1.7<br>
-      2015.8.18. v1.0.0 project create<br>
-    ]]>
+  <change-notes>
   </change-notes>
 
   <idea-version since-build="107.105"/>
