@@ -42,7 +42,7 @@
 #foreach($!{column} in $!{columnList})
 #if("$column.name"=="gmt_modified"||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name")
 #else
-            <if test="${column.property} != null">
+    <if test="${column.property} != null">
                 ${column.name} = #{${column.property}},
             </if>
 #end
@@ -80,7 +80,7 @@
 
     <select id="queryCount" resultClass="int">
         SELECT
-        COUNT(*)
+        COUNT(1)
         FROM ${tableName}
         <where>
             #if($haveIsDeleted) is_deleted = 0 #elseif($!haveDeleted) deleted = 0 #else

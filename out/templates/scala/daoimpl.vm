@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository
  * Powered by duxing@Taobao
  */
 
-<#--@ChildOf(parent = "baseDAO")-->
+//@ChildOf(parent = "baseDAO")
 @Repository
 class ${className} extends BaseDAO with ${daoClassName}{
 
@@ -31,14 +31,14 @@ class ${className} extends BaseDAO with ${daoClassName}{
      */
     @throws(classOf[Exception])
     override def insert(${doPropertyName}: ${doClassName}): ${primaryKeyType} = {
-        #if($daoUseSequence)
+#if($daoUseSequence)
         val ${primaryKeyName} = this.getNextId("${tableName}")
         ${doPropertyName}.set${primaryKeyNameAtMethod}(${primaryKeyName})
         insert(NAMESPACE + "insert", ${doPropertyName})
         ${primaryKeyName}
-        #else
+#else
         insert(NAMESPACE + "insert", ${doPropertyName})
-        #end
+#end
      }
 
     /**
@@ -71,7 +71,6 @@ class ${className} extends BaseDAO with ${daoClassName}{
      * @return List
      * @throws Exception exception
      */
-    @SuppressWarnings("unchecked")
     @throws(classOf[Exception])
     override def getList(${queryPropertyName}: ${queryClassName}): util.List[${doClassName}] = {
         queryForList(NAMESPACE + "queryList", ${queryPropertyName}).asInstanceOf[util.List[${doClassName}]]
@@ -90,11 +89,11 @@ class ${className} extends BaseDAO with ${daoClassName}{
     }
 
     /**
-    #if($daoLogicDelete)
+#if($daoLogicDelete)
      * logically delete one line
-    #else
+#else
      * physically delete one line
-    #end
+#end
      *
      * @param ${primaryKeyName} key
      * @return delete num
@@ -102,11 +101,11 @@ class ${className} extends BaseDAO with ${daoClassName}{
      */
     @throws(classOf[Exception])
     override def delete(${primaryKeyName}: ${primaryKeyType}): Int = {
-        #if($daoLogicDelete)
+#if($daoLogicDelete)
         update(NAMESPACE + "delete", ${primaryKeyName})
-        #else
+#else
         delete(NAMESPACE + "delete", ${primaryKeyName})
-        #end
+#end
     }
 
 }

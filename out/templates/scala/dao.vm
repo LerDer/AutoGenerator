@@ -69,11 +69,11 @@ trait ${className} extends BaseDAO{
     def getCount(${queryPropertyName}: ${queryClassName}): Int
 
     /**
-    #if($daoLogicDelete)
+#if($daoLogicDelete)
      * logically delete one line
-    #else
+#else
      * physically delete one line
-    #end
+#end
      *
      * @param ${primaryKeyName} key
      * @return delete num

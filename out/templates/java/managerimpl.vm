@@ -31,11 +31,11 @@ public class ${className} implements ${managerClassName}{
      * @throws Exception exception
      */
     public ${primaryKeyType} insert(${objClassName} ${objPropertyName}) throws Exception{
-        #if($managerUseBO)
+#if($managerUseBO)
         return ${daoPropertyName}.insert(${transferClassName}.toDO(${objPropertyName}));
-        #else
+#else
         return ${daoPropertyName}.insert(${objPropertyName});
-        #end
+#end
     }
 
     /**
@@ -46,11 +46,11 @@ public class ${className} implements ${managerClassName}{
      * @throws Exception exception
      */
     public int update(${objClassName} ${objPropertyName}) throws Exception{
-        #if($managerUseBO)
+#if($managerUseBO)
         return ${daoPropertyName}.update(${transferClassName}.toDO(${objPropertyName}));
-        #else
+#else
         return ${daoPropertyName}.update(${objPropertyName});
-        #end
+#end
     }
 
     /**
@@ -61,11 +61,11 @@ public class ${className} implements ${managerClassName}{
      * @throws Exception exception
      */
     public ${objClassName} get(${primaryKeyType} ${primaryKeyName}) throws Exception{
-        #if($managerUseBO)
+#if($managerUseBO)
         return ${transferClassName}.toBO(${daoPropertyName}.get(${primaryKeyName}));
-        #else
+#else
         return ${daoPropertyName}.get(${primaryKeyName});
-        #end
+#end
     }
 
     /**
@@ -76,11 +76,11 @@ public class ${className} implements ${managerClassName}{
      * @throws Exception exception
      */
     public List<${objClassName}> getList(${queryClassName} ${queryPropertyName}) throws Exception{
-        #if($managerUseBO)
+#if($managerUseBO)
         return ${transferClassName}.toBOList(${daoPropertyName}.getList(${queryPropertyName}));
-        #else
+#else
         return ${daoPropertyName}.getList(${queryPropertyName});
-        #end
+#end
     }
 
     /**

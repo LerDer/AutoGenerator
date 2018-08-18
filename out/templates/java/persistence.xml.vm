@@ -3,7 +3,6 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
-
     <!-- dynamic data source -->
     <bean id="projectDS" class="com.taobao.tddl.jdbc.group.TGroupDataSource" init-method="init">
         <property name="dbGroupKey" value="{DIAMOND_PROJECT}_GROUP" />
@@ -11,7 +10,6 @@
     </bean>
 
 	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate"/>
-
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource">
@@ -53,7 +51,6 @@
         <property name="sequenceDao" ref="sequenceDao"/>
         <property name="name" value="${tableName}"/>
     </bean>
-
 
     <bean id="baseDAO" class="${package}.BaseDAO" abstract="true">
         <property name="sequenceTable">

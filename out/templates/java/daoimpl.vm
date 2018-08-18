@@ -27,14 +27,14 @@ public class ${className} extends BaseDAO implements ${daoClassName}{
      * @throws Exception exception
      */
      public ${primaryKeyType} insert(${doClassName} ${doPropertyName}) throws Exception{
-        #if($daoUseSequence)
+#if($daoUseSequence)
         ${primaryKeyType} ${primaryKeyName} = this.getNextId("${tableName}");
         ${doPropertyName}.set${primaryKeyNameAtMethod}(${primaryKeyName});
         insert(NAMESPACE + "insert", ${doPropertyName});
         return ${primaryKeyName};
-        #else
+#else
         return insert(NAMESPACE + "insert", ${doPropertyName});
-        #end
+#end
      }
 
     /**
@@ -82,22 +82,22 @@ public class ${className} extends BaseDAO implements ${daoClassName}{
     }
 
     /**
-    #if($daoLogicDelete)
+#if($daoLogicDelete)
      * logically delete one line
-    #else
+#else
      * physically delete one line
-    #end
+#end
      *
      * @param ${primaryKeyName} key
      * @return delete num
      * @throws Exception exception
      */
     public int delete(${primaryKeyType} ${primaryKeyName}) throws Exception{
-        #if($daoLogicDelete)
+#if($daoLogicDelete)
         return update(NAMESPACE + "delete", ${primaryKeyName});
-        #else
+#else
         return delete(NAMESPACE + "delete", ${primaryKeyName});
-        #end
+#end
     }
 
 }

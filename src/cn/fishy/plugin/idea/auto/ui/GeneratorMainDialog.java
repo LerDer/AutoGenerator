@@ -149,11 +149,11 @@ public class GeneratorMainDialog extends JDialog {
     private Column primaryColumn;
     private final FileChooserDescriptor chooseFolderOnlyDescriptor = FileChooserDescriptorFactory.createSingleFolderDescriptor();
     //样式
-    EditorColorsScheme colorScheme;
-    Color background;
-    JBTable jtable;
-    static String[] colNames = ColumnEnum.getColumnNames(); //表头信息
-    String path;
+    private EditorColorsScheme colorScheme;
+    private Color background;
+    private JBTable jtable;
+    private static String[] colNames = ColumnEnum.getColumnNames(); //表头信息
+    private String path;
     private static final Logger logger = Logger.getInstance(GeneratorMainDialog.class);
 
     public GeneratorMainDialog() {
@@ -184,24 +184,13 @@ public class GeneratorMainDialog extends JDialog {
 */
 
         //step1 - analy sql
-        BTN_analy.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onAnaly();
-            }
-        });
+        BTN_analy.addActionListener(e -> onAnaly());
 
         //step3 - apply settings
-        BTN_apply.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onApply();
-            }
-        });
+        BTN_apply.addActionListener(e -> onApply());
 
-        ActionListener act = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onGeneratorClick(e);
-            }
-        };
+        ActionListener act = this::onGeneratorClick;
+
         BTN_query.addActionListener(act);
         BTN_do.addActionListener(act);
         BTN_dao.addActionListener(act);
@@ -220,107 +209,70 @@ public class GeneratorMainDialog extends JDialog {
         BTN_SQLMapConfigXml.addActionListener(act);
         BTN_PersistenceXml.addActionListener(act);
 
-        BTN_selPath.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                chooseFolderOnlyDescriptor.setTitle("Select Path");
-                chooseFolderOnlyDescriptor.setDescription("Select Path To Generate, generally we choose the biz path to generate");
-                VirtualFile file = FileChooser.chooseFile(chooseFolderOnlyDescriptor, Env.project, null);
-                if (file != null) {
-                    INPUT_path.setText(file.getPath());
-                    TEXT_msg.setText("");
-                    SettingManager.applyPrjPath(file.getPath());
-                    System.out.println(file.getPath());
-                }
+        BTN_selPath.addActionListener(e -> {
+            chooseFolderOnlyDescriptor.setTitle("Select Path");
+            chooseFolderOnlyDescriptor.setDescription("Select Path To Generate, generally we choose the biz path to generate");
+            VirtualFile file = FileChooser.chooseFile(chooseFolderOnlyDescriptor, Env.project, null);
+            if (file != null) {
+                INPUT_path.setText(file.getPath());
+                TEXT_msg.setText("");
+                SettingManager.applyPrjPath(file.getPath());
+                System.out.println(file.getPath());
             }
         });
 
-        BTN_selTplPath.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                chooseFolderOnlyDescriptor.setTitle("Select Path");
-                chooseFolderOnlyDescriptor.setDescription("Select The Path To Save The Custom Templates");
-                VirtualFile file = FileChooser.chooseFile(chooseFolderOnlyDescriptor, Env.project, null);
-                if (file != null) {
-                    INPUT_tplPath.setText(file.getPath());
-                    System.out.println(file.getPath());
-                }
+        BTN_selTplPath.addActionListener(e -> {
+            chooseFolderOnlyDescriptor.setTitle("Select Path");
+            chooseFolderOnlyDescriptor.setDescription("Select The Path To Save The Custom Templates");
+            VirtualFile file = FileChooser.chooseFile(chooseFolderOnlyDescriptor, Env.project, null);
+            if (file != null) {
+                INPUT_tplPath.setText(file.getPath());
+                System.out.println(file.getPath());
             }
         });
 
-        BTN_tplInit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String tplPath = INPUT_tplPath.getText();
-                boolean r = checkTplPath(tplPath);
-                if(r){
-                    initTemplates(tplPath);
-                }
+        BTN_tplInit.addActionListener(e -> {
+            String tplPath = INPUT_tplPath.getText();
+            boolean r = checkTplPath(tplPath);
+            if(r){
+                initTemplates(tplPath);
             }
         });
 
-        CHK_useCustomTpl.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                showTplSelect();
-            }
+        CHK_useCustomTpl.addActionListener(e -> showTplSelect());
+
+        SELECT_code.addActionListener(e -> {
+            String code = (String) SELECT_code.getSelectedItem();
+            SettingManager.applyPrjCode(code);
         });
 
-        SELECT_code.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String code = (String) SELECT_code.getSelectedItem();
-                SettingManager.applyPrjCode(code);
-            }
-        });
-
-        SELECT_encoding.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String encoding = (String) SELECT_encoding.getSelectedItem();
-                SettingManager.applyPrjEncoding(encoding);
-            }
+        SELECT_encoding.addActionListener(e -> {
+            String encoding = (String) SELECT_encoding.getSelectedItem();
+            SettingManager.applyPrjEncoding(encoding);
         });
 
         //checkbox的save
-        ActionListener saveSwitches = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                applySwitch();
-            }
-        };
+        ActionListener saveSwitches = e -> applySwitch();
         CHK_daoLogicDel.addActionListener(saveSwitches);
         CHK_daoUseSeq.addActionListener(saveSwitches);
-        CHK_pageQuery.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checkGenerateBase();
-                applySwitch();
-            }
+        CHK_pageQuery.addActionListener(e -> {
+            checkGenerateBase();
+            applySwitch();
         });
         CHK_overwrite.addActionListener(saveSwitches);
-        CHK_generateBase.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checkGenerateBase();
-                applySwitch();
-            }
+        CHK_generateBase.addActionListener(e -> {
+            checkGenerateBase();
+            applySwitch();
         });
-        CHK_managerUseBO.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                checkManagerUseBO();
-                applySwitch();
-            }
+        CHK_managerUseBO.addActionListener(e -> {
+            checkManagerUseBO();
+            applySwitch();
         });
-        BTN_go.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Desktop.getDesktop().browse(
-                            new java.net.URI(INPUT_tddl_url.getText()));
-                }catch (Exception e1){}
-            }
+        BTN_go.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(
+                        new java.net.URI(INPUT_tddl_url.getText()));
+            }catch (Exception e1){}
         });
         //step2 - generate codes
 
@@ -328,6 +280,7 @@ public class GeneratorMainDialog extends JDialog {
 // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
@@ -335,6 +288,7 @@ public class GeneratorMainDialog extends JDialog {
 
 // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -345,21 +299,26 @@ public class GeneratorMainDialog extends JDialog {
     }
 
     private void initTemplates(String tplPath) {
+        StringBuilder tplPathBuilder = new StringBuilder(tplPath);
         for(Code c:Code.values()) {
-            if(!tplPath.endsWith("/")){
-                tplPath+="/";
+            if(!tplPathBuilder.toString().endsWith("/")){
+                tplPathBuilder.append("/");
             }
-            String path = tplPath + c.getTplPath();
+            String path = tplPathBuilder + c.getTplPath();
             System.out.println(path);
             checkThePath(path);
             for (GenerateType gt : GenerateType.values()) {
-                if(gt.equals(GenerateType.ALL))continue;
+                if(gt.equals(GenerateType.ALL)) {
+                    continue;
+                }
                 String name = gt.getName().toLowerCase();
                 String file = path + name + TemplateConfig.TEMPLATE_EXT;
                 String content = null;
                 try {
                     content = TemplateUtil.getOriginTplContent(c, gt);
-                    if(content==null)content="";
+                    if(content==null) {
+                        content="";
+                    }
                     File f1 = new File(file);
                     if(f1.exists()) {
                         String c1 = FileUtil.loadFile(f1,"UTF-8");
@@ -376,6 +335,7 @@ public class GeneratorMainDialog extends JDialog {
             }
             TEXT_msg.setText("tpl inited!");
         }
+        tplPath = tplPathBuilder.toString();
     }
 
     private boolean stringEqual(String c1, String content) {
@@ -409,7 +369,7 @@ public class GeneratorMainDialog extends JDialog {
     }
 
     private boolean checkTplPath(String tplPath) {
-        if(tplPath==null || tplPath.trim().equals("")){
+        if(tplPath==null || "".equals(tplPath.trim())){
             TEXT_msg.setText("please set the custom tpl path!");
             return false;
         }else{
@@ -446,8 +406,10 @@ public class GeneratorMainDialog extends JDialog {
     }
 
     private void onGeneratorClick(ActionEvent e) {
-        String c = e.getActionCommand();  //Generate DO
-        String[] a = c.split(" "); // ["Generate","DO"]
+        //Generate DO
+        String c = e.getActionCommand();
+        // ["Generate","DO"]
+        String[] a = c.split(" ");
         if(a.length==2){
             String t = a[1];
             generate(t);

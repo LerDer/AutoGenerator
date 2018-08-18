@@ -20,18 +20,18 @@ public class ${transferClassName}{
     public static ${boClassName} toBO(${doClassName} d) {
         if (d == null) return null;
         ${boClassName} bo = new ${boClassName}();
-        #foreach($!{column} in $!{columnList})
+#foreach($!{column} in $!{columnList})
         bo.set${column.key}(d.get${column.key}());
-        #end
+#end
         return bo;
     }
 
     public static ${doClassName} toDO(${boClassName} bo) {
         if (bo == null) return null;
         ${doClassName} d = new ${doClassName}();
-        #foreach($!{column} in $!{columnList})
+#foreach($!{column} in $!{columnList})
         d.set${column.key}(bo.get${column.key}());
-        #end
+#end
         return d;
     }
 

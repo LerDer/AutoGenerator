@@ -15,7 +15,6 @@ import scala.collection.JavaConversions._
  * Generate by ${autoName}
  * Powered by duxing@Taobao
  */
-
 object ${transferClassName}{
     /**
      * change do to bo
@@ -23,9 +22,9 @@ object ${transferClassName}{
     def toBO(d: ${doClassName}): ${boClassName} = {
         if (d == null) return null
         val bo: ${boClassName} = new ${boClassName}()
-        #foreach($!{column} in $!{columnList})
+#foreach($!{column} in $!{columnList})
         bo.set${column.key}(d.get${column.key}())
-        #end
+#end
         bo
     }
 
@@ -35,9 +34,9 @@ object ${transferClassName}{
     def toDO(bo: ${boClassName}): ${doClassName} = {
         if (bo == null) return null
         val d: ${doClassName} = new ${doClassName}()
-        #foreach($!{column} in $!{columnList})
+#foreach($!{column} in $!{columnList})
         d.set${column.key}(bo.get${column.key}())
-        #end
+#end
         d
     }
     /**

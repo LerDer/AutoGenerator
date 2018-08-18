@@ -19,7 +19,12 @@ public class PluginProjectConfig implements Serializable {
     public boolean pagerQuery = true;
     public boolean overwrite = false;
     public Boolean generateBase = false;
-    public String sql = "INPUT SQL HERE JUST LIKE BELOW  \n\n ================================================ \n\nCREATE TABLE `app_model` ( `ID` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id for number',  `app` varchar(20) NOT NULL COMMENT 'application name',   `model` varchar(20) NOT NULL COMMENT 'application model',   PRIMARY KEY (`id`),    KEY `app` (`app`,`model`) ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='application model table' AUTO_INCREMENT=2;\n" +
+    public String sql = "INPUT SQL HERE JUST LIKE BELOW  \n\n ================================================ \n\nCREATE TABLE `app_model` ( `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id for number',  `app` varchar(20) NOT NULL COMMENT " +
+            "'application name',   `model` varchar(20) NOT NULL COMMENT 'application model', `gmt_created` datetime NOT NULL COMMENT '创建时间', `gmt_modified` datetime COMMENT '修改时间',`is_deleted` char(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除', PRIMARY KEY " +
+            "(`id`),    KEY `app` (`app`,`model`) ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='application " +
+            "model " +
+            "table' " +
+            "AUTO_INCREMENT=2;\n" +
             "\n" +
             " ================================================ \n" +
             "\n";

@@ -34,11 +34,11 @@ class ${className} extends ${managerClassName}{
      */
     override def insert(${objPropertyName}: ${objClassName}): ${primaryKeyType} = {
         try{
-            #if($managerUseBO)
+#if($managerUseBO)
             ${daoPropertyName}.insert(${transferClassName}.toDO(${objPropertyName}))
-            #else
+#else
             ${daoPropertyName}.insert(${objPropertyName})
-            #end
+#end
         }catch {
             case e:Exception =>
                 logger.error("[${className}.insert]",e)
@@ -55,11 +55,11 @@ class ${className} extends ${managerClassName}{
      */
     override def update(${objPropertyName}: ${objClassName}): Int = {
         try{
-            #if($managerUseBO)
+#if($managerUseBO)
             ${daoPropertyName}.update(${transferClassName}.toDO(${objPropertyName}))
-            #else
+#else
             ${daoPropertyName}.update(${objPropertyName})
-            #end
+#end
         }catch {
             case e:Exception =>
                 logger.error("[${className}.update]",e)
@@ -76,11 +76,11 @@ class ${className} extends ${managerClassName}{
      */
     override def get(${primaryKeyName}: ${primaryKeyType}): ${objClassName} = {
         try{
-            #if($managerUseBO)
+#if($managerUseBO)
             ${transferClassName}.toBO(${daoPropertyName}.get(${primaryKeyName}))
-            #else
+#else
             ${daoPropertyName}.get(${primaryKeyName})
-            #end
+#end
         }catch {
             case e:Exception =>
                 logger.error("[${className}.get]",e)
@@ -97,11 +97,11 @@ class ${className} extends ${managerClassName}{
      */
     override def getList(${queryPropertyName}: ${queryClassName}): util.List[${objClassName}] = {
         try{
-            #if($managerUseBO)
+#if($managerUseBO)
             ${transferClassName}.toBOList(${daoPropertyName}.getList(${queryPropertyName}))
-            #else
+#else
             ${daoPropertyName}.getList(${queryPropertyName})
-            #end
+#end
         }catch {
             case e:Exception =>
                 logger.error("[${className}.getList]",e)
