@@ -1,19 +1,25 @@
 package cn.fishy.plugin.idea.auto.domain;
 
-/**
- * User: duxing
- * Date: 2015.08.12 2:28
- */
 public class Setting {
-    //作者
+    /**
+     * 作者
+     */
     private String author;
-    //语言
+    /**
+     * 语言
+     */
     private String language;
-    //编码
+    /**
+     * 编码
+     */
     private String encoding;
-    //输出代码类型
+    /**
+     * 输出代码类型
+     */
     private String code;
-    //输出路径
+    /**
+     * 输出路径
+     */
     private String path;
     /**
      * 模板路径
@@ -25,11 +31,11 @@ public class Setting {
     private Boolean tplUseCustom;
 
     public Boolean daoLogicDelete;
-    public Boolean managerUseBO;
+    private Boolean managerUseBO;
     public Boolean daoUseSequence;
     public Boolean pagerQuery;
     public Boolean overwrite;
-    public Boolean generateBase;
+    private Boolean generateBase;
 
     public Setting() {
     }

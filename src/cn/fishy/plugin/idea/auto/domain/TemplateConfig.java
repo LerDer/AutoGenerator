@@ -8,10 +8,6 @@ import com.intellij.openapi.diagnostic.Logger;
 
 import java.io.File;
 
-/**
- * User: duxing
- * Date: 2016-05-04 16:42
- */
 public class TemplateConfig {
 
     private static final Logger logger = Logger.getInstance(TemplateConfig.class);
@@ -19,16 +15,18 @@ public class TemplateConfig {
     public static final String TEMPLATE_EXT = ".vm";
     public static String TEMPLATE_DIR = "templates/";
 
-    public static String getTemplatePath() {
+    private static String getTemplatePath() {
         PluginConfig pluginConfig = PluginConfigHolder.getPluginConfig();
-        if(pluginConfig!=null){
-            if(pluginConfig.tplUseCustom && pluginConfig.tplPathCustom!=null && !pluginConfig.tplPathCustom.equals("")){
+        if (pluginConfig != null) {
+            if (pluginConfig.tplUseCustom && pluginConfig.tplPathCustom != null && !pluginConfig.tplPathCustom.equals("")) {
                 File path = new File(pluginConfig.tplPathCustom);
-                if(path.exists()){
-                    if(!pluginConfig.tplPathCustom.endsWith("/"))pluginConfig.tplPathCustom+="/";
+                if (path.exists()) {
+                    if (!pluginConfig.tplPathCustom.endsWith("/")) {
+                        pluginConfig.tplPathCustom += "/";
+                    }
                     return pluginConfig.tplPathCustom;
-                }else{
-                    logger.error("path: "+ pluginConfig.tplPathCustom +" is not exist!");
+                } else {
+                    logger.error("path: " + pluginConfig.tplPathCustom + " is not exist!");
                 }
             }
         }

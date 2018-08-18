@@ -4,10 +4,6 @@ import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 
-/**
- * User: duxing
- * Date: 2015.08.13 2:08
- */
 public class SqlInfo {
     private String tableName;
     private String primaryKey;
@@ -47,6 +43,6 @@ public class SqlInfo {
     }
 
     public boolean isValid() {
-        return this.columnList!=null && this.columnList.size()>0 && StringUtils.isNotBlank(tableName);
+        return this.columnList != null && this.columnList.size() > 0 && StringUtils.isNotBlank(tableName);
     }
 }
