@@ -20,16 +20,6 @@
       <br><br>本工具根据建表语句自动创建数据持久层.
       <br><br>数据持久层包含DO, Query, DAO, Manager, sqlmap 等
       <br><br>本工具只设计为生成java和scala代码, 也许以后也会有更多的代码支持
-      <br><br>生成的代码默认使用了ibatis和<a href="https://github.com/alibaba/tb_tddl" target="_blank">tddl</a>, 如果你不喜欢, 请自行生成后替换.
-      <br><br>当然, 也可以反馈给我, 其他更好的建议.
-      <br><br>本工具将在"Tools"菜单中和"Go To"菜单中会出现, 快捷键: ctrl+shift+\
-      <br><br>jdk1.7 for 1.0.0, jdk1.6 for 1.0.1 and later.
-      <br><br>如果你觉得下载很慢, 可以去<a href="https://github.com/i17c/AutoGenerator/tree/master/releases">https://github.com/i17c/AutoGenerator/tree/master/releases</a>
-      <br>
-      <br>
-      <br><img src="http://gtms02.alicdn.com/tps/i2/TB1NvCuJXXXXXblXXXXfMzNVVXX-312-375.png" border="0" width="300" height="360">
-      <br><img src="http://gtms03.alicdn.com/tps/i3/TB1GsiXJXXXXXXQaXXXqbSXOpXX-609-433.png" border="0" width="600" height="400">
-      <br><a href="http://www.laiwang.com/" target="_blank"><img src="http://i01.lw.aliimg.com/tfs/TB15JfxGXXXXXcrXFXXXCDWUVXXLAIWANGi_1_1136_1136.jpg" border="0" width="120" height="120"></a>
 
     ]]></description>
 
@@ -62,4 +52,10 @@
     </action>
   </actions>
 
+    <project-components>
+        <component>
+            <implementation-class>cn.fishy.plugin.idea.auto.component.PsiFileManager</implementation-class>
+            <interface-class>cn.fishy.plugin.idea.auto.component.PsiFileManager</interface-class>
+        </component>
+    </project-components>
 </idea-plugin>

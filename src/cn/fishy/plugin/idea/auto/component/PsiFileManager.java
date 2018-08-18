@@ -12,18 +12,12 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * PsiClassManager
- *
- * User: duxing
- * Date: 2015.8.17 12:09:18
- */
 public class PsiFileManager implements ProjectComponent {
 
-    Project project;
-    PsiManager psiManager;
-    CodeStyleManager codeStyleManager;
-    LocalFileSystem localFileSystem;
+    private Project project;
+    private PsiManager psiManager;
+    private CodeStyleManager codeStyleManager;
+    private LocalFileSystem localFileSystem;
 
     public PsiFileManager(Project project,
                           PsiManager psiManager,
@@ -35,35 +29,43 @@ public class PsiFileManager implements ProjectComponent {
         this.codeStyleManager = codeStyleManager;
     }
 
-    public static PsiFileManager getInstance(Project project){
+    public static PsiFileManager getInstance(Project project) {
         return project.getComponent(PsiFileManager.class);
     }
 
     public PsiClass findPrimaryClass(String filePath) {
         debug("findPrimaryClass filePath=" + filePath);
-        if (filePath == null) return null;
+        if (filePath == null) {
+            return null;
+        }
         VirtualFile vFile = localFileSystem.findFileByPath(filePath);
-        if (vFile == null) return null;
+        if (vFile == null) {
+            return null;
+        }
         PsiFile psiFile = psiManager.findFile(vFile);
         return findPrimaryClass(psiFile);
     }
 
     public PsiFile findPsiFile(String filePath) {
         debug("findPsiFile filePath=" + filePath);
-        if (filePath == null) return null;
+        if (filePath == null) {
+            return null;
+        }
         VirtualFile vFile = localFileSystem.findFileByPath(filePath);
-        if (vFile == null) return null;
-        PsiFile psiFile = psiManager.findFile(vFile);
-        return psiFile;
+        if (vFile == null) {
+            return null;
+        }
+        return psiManager.findFile(vFile);
     }
 
-    public PsiClass findPrimaryClass(PsiFile psiFile) {
-        if (psiFile == null || !(psiFile instanceof PsiJavaFile)) return null;
+    private PsiClass findPrimaryClass(PsiFile psiFile) {
+        if (psiFile == null || !(psiFile instanceof PsiJavaFile)) {
+            return null;
+        }
         PsiJavaFile javaFile = (PsiJavaFile) psiFile;
         PsiClass[] classes = javaFile.getClasses();
         String filePrimaryClassName = getPrimaryClassNameFromJavaFileName(javaFile.getName());
-        for (int i = 0; i < classes.length; i++) {
-            PsiClass aClass = classes[i];
+        for (PsiClass aClass : classes) {
             if (filePrimaryClassName.equals(aClass.getName())) {
                 return aClass;
             }
@@ -71,10 +73,9 @@ public class PsiFileManager implements ProjectComponent {
         return null;
     }
 
-    public static String getPrimaryClassNameFromJavaFileName(String name) {
+    private static String getPrimaryClassNameFromJavaFileName(String name) {
         return name.substring(0, name.length() - ".java".length());
     }
-
 
 
     private void debug(String message) {

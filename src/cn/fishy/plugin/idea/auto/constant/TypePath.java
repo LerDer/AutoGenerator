@@ -1,11 +1,7 @@
 package cn.fishy.plugin.idea.auto.constant;
 
-/**
- * User: duxing
- * Date: 2015.08.17 22:30
- */
-public enum TypePath{
-    SRC("src"),RESOURCES("resources");
+public enum TypePath {
+    SRC("src"), RESOURCES("resources");
     private String path;
 
     TypePath(String path) {
@@ -16,11 +12,11 @@ public enum TypePath{
         return path;
     }
 
-    public boolean isSrc(){
+    public boolean isSrc() {
         return this.path.equals("src");
     }
 
-    public boolean isResources(){
+    public boolean isResources() {
         return this.path.equals("resources");
     }
 }

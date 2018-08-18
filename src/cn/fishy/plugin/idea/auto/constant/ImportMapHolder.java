@@ -7,14 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: duxing
- * Date: 2015-08-15 16:41
- */
 public class ImportMapHolder {
-    public static Map<String,String> importMap = new HashMap<String, String>();
-    public static List<String> javaIgnoreTypeList = new ArrayList<String>();
-    static{
+    private static Map<String, String> importMap = new HashMap<>();
+    private static List<String> javaIgnoreTypeList = new ArrayList<>();
+
+    static {
         importMap.put("Date", "java.util.Date");
         importMap.put("Long", "java.lang.Long");
         importMap.put("Integer", "java.lang.Integer");
@@ -23,9 +20,9 @@ public class ImportMapHolder {
         javaIgnoreTypeList.add("Integer");
     }
 
-    public static String getImport(String type,Code code){
+    public static String getImport(String type, Code code) {
         String r = importMap.get(type);
-        if(code.equals(Code.JAVA) && javaIgnoreTypeList.contains(type)){
+        if (code.equals(Code.JAVA) && javaIgnoreTypeList.contains(type)) {
             return null;
         }
         return r;

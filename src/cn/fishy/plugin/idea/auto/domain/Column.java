@@ -3,10 +3,6 @@ package cn.fishy.plugin.idea.auto.domain;
 import cn.fishy.plugin.idea.auto.util.NameUtil;
 import cn.fishy.plugin.idea.auto.util.TypeChanger;
 
-/**
- * User: duxing
- * Date: 2015.08.12 3:13
- */
 public class Column {
 
     private String name;
@@ -65,46 +61,63 @@ public class Column {
         this.isPrimaryKey = isPrimaryKey;
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         String r = "{";
-        if(name!=null){
-            r+="\"name\":\""+name+"\"";
+        if (name != null) {
+            r += "\"name\":\"" + name + "\"";
         }
-        if(property!=null){
-            if(!r.equals("{")){r+=",";}
-            r+="\"property\":\""+property+"\"";
+        if (property != null) {
+            if (!"{".equals(r)) {
+                r += ",";
+            }
+            r += "\"property\":\"" + property + "\"";
         }
-        if(type!=null){
-            if(!r.equals("{")){r+=",";}
-            r+="\"type\":\""+type+"\"";
+        if (type != null) {
+            if (!"{".equals(r)) {
+                r += ",";
+            }
+            r += "\"type\":\"" + type + "\"";
         }
-        if(typeStr!=null){
-            if(!r.equals("{")){r+=",";}
-            r+="\"typeStr\":\""+typeStr+"\"";
+        if (typeStr != null) {
+            if (!"{".equals(r)) {
+                r += ",";
+            }
+            r += "\"typeStr\":\"" + typeStr + "\"";
         }
-        if(comment!=null){
-            if(!r.equals("{")){r+=",";}
-            r+="\"comment\":\""+comment+"\"";
-        }else{
-            if(!r.equals("{")){r+=",";}
-            r+="\"comment\":\""+property+"\"";
+        if (comment != null) {
+            if (!"{".equals(r)) {
+                r += ",";
+            }
+            r += "\"comment\":\"" + comment + "\"";
+        } else {
+            if (!"{".equals(r)) {
+                r += ",";
+            }
+            r += "\"comment\":\"" + property + "\"";
         }
-        if(isPrimaryKey){
-            if(!r.equals("{")){r+=",";}
-            r+="\"isPrimaryKey\":\""+isPrimaryKey+"\"";
+        if (isPrimaryKey) {
+            if (!"{".equals(r)) {
+                r += ",";
+            }
+            r += "\"isPrimaryKey\":\"" + isPrimaryKey + "\"";
         }
-        r+="}";
+        r += "}";
         return r;
     }
 
 
     public String getProperty() {
-        if(property==null)property= NameUtil.propertyName(this.getName());
+        if (property == null) {
+            property = NameUtil.propertyName(this.getName());
+        }
         return property;
     }
 
     public String getKey() {
-        if(property==null)return null;
+        if (property == null) {
+            return null;
+        }
         return NameUtil.upFirst(property);
     }
 
@@ -117,7 +130,7 @@ public class Column {
         return this.isPrimaryKey() ? "Y" : "";
     }
 
-    public String isPrimary(){
-        return this.isPrimaryKey()?"Y":"";
+    public String isPrimary() {
+        return this.isPrimaryKey() ? "Y" : "";
     }
 }
