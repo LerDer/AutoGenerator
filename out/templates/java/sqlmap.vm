@@ -19,18 +19,25 @@
 #end
     </sql>
 
+    <sql id="no_id_column">
+        #set($i = 0) #set($size = $!{columnList.size()}) #foreach($!{column} in $!{columnList})
+        #if("$column.name"=="${primaryKeyColumn.name}" || "$column.name"=="gmt_modified"|| "$column.name"=="gmt_modify")#else ${column.name}#if($i + 1 == $size)#else,#end
+        #end
+
+        #set($i = $i + 1)
+        #end
+    </sql>
+
     <insert id="insert" parameterClass="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="id">
 	    INSERT INTO ${tableName} (
-        <include refid="base_column"/>
+        <include refid="no_id_column"/>
         )VALUES(
-#set($i = 0)
-#set($size = $!{columnList.size()})
-#foreach($!{column} in $!{columnList})
-    #if("$column.name"=="gmt_modified" || "$column.name"=="gmt_create"|| "$column.name"=="gmt_created")now()#elseif("$column.name"=="is_deleted" ||  "$column.name"=="deleted") 0 #else#{${column.property}}#if($i + 1 == $size)#else,#end
+#set($i = 0) #set($size = $!{columnList.size()}) #foreach($!{column} in $!{columnList})
+            #if("$column.name"=="${primaryKeyColumn.name}" || "$column.name"=="gmt_modify"|| "$column.name"=="gmt_modified") #elseif("$column.name"=="gmt_create" || "$column.name"=="gmt_created")now(), #elseif("$column.name"=="is_deleted" || "$column.name"=="is_delete" ||  "$column.name"=="deleted") 0,
+            #else  #{${column.property}}#if($i + 1 == $size)#else,#end  #end
+            #set($i = $i + 1)
 
-#end
-#set($i = $i + 1)
-#end
+            #end
         )
 
 #if($daoUseSequence)#else
@@ -41,16 +48,23 @@
     </insert>
 
     <update id="update">
-        UPDATE ${tableName} SET #if($haveGmtModified) gmt_modified = now()#else ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
-#end
+        UPDATE ${tableName}
+        <set>
 #foreach($!{column} in $!{columnList})
-#if("$column.name"=="gmt_modified"||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name")
+#if("$column.name"=="gmt_modified" || "$column.name"=="gmt_modify" ||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name" || "$column.name"=="is_deleted" || "$column.name"=="is_delete")
+    #if("$column.name"=="gmt_modified")
+        gmt_modified = now(),
+    #end
+    #if("$column.name"=="gmt_modify")
+        gmt_modify = now(),
+    #end
 #else
     <if test="${column.property} != null">
                 ${column.name} = #{${column.property}},
             </if>
 #end
 #end
+        </set>
         WHERE ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
     </update>
 
@@ -60,15 +74,22 @@
         FROM ${tableName} WHERE ${primaryKeyColumn.name} = #{${primaryKeyColumn.property}}
     </select>
 
-    <select id="queryList" resultMap="baseMap">
+    <select id="getList" resultMap="baseMap">
         SELECT
         <include refid="base_column"/>
         FROM ${tableName}
         <where>
-            #if($haveIsDeleted) is_deleted = 0 #elseif($!haveDeleted) deleted = 0 #else
-#end
 #foreach($!{column} in $!{columnQueryList})
-#if("$column.name"=="is_deleted"||"$column.name"=="deleted"||"$column.name"=="gmt_modified"||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name")
+#if("$column.name"=="is_deleted"|| "$column.name"=="is_delete"||"$column.name"=="deleted"||"$column.name"=="gmt_modified" || "$column.name"=="gmt_modify" ||"$column.name"=="gmt_create"||"$column.name"=="gmt_created")
+    #if("$column.name"=="is_deleted")
+        AND is_deleted = 0,
+    #end
+    #if("$column.name"=="is_delete")
+        AND is_delete = 0,
+    #end
+    #if("$column.name"=="deleted")
+        AND deleted = 0,
+    #end
 #else
             <if test= "${column.property} != null">
                 AND ${column.name} = #{${column.property}}
@@ -78,19 +99,28 @@
         </where>
 #if($pagerQuery)
         ORDER BY ${primaryKeyColumn.name} DESC
-        LIMIT #{startRow}, #{limit}
+    <if test= "start != null">
+        LIMIT #{start}, #{limit}
+    </if>
 #end
     </select>
 
-    <select id="queryCount" resultClass="int">
+    <select id="getCount" resultClass="int">
         SELECT
         COUNT(1)
         FROM ${tableName}
         <where>
-            #if($haveIsDeleted) is_deleted = 0 #elseif($!haveDeleted) deleted = 0 #else
-            #end
             #foreach($!{column} in $!{columnQueryList})
-                #if("$column.name"=="is_deleted"||"$column.name"=="deleted"||"$column.name"=="gmt_modified"||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name")
+                #if("$column.name"=="is_deleted"|| "$column.name"=="is_delete"||"$column.name"=="deleted"||"$column.name"=="gmt_modified" || "$column.name"=="gmt_modify" ||"$column.name"=="gmt_create"||"$column.name"=="gmt_created")
+                    #if("$column.name"=="is_deleted")
+                        AND is_deleted = 0,
+                    #end
+                    #if("$column.name"=="is_delete")
+                        AND is_delete = 0,
+                    #end
+                    #if("$column.name"=="deleted")
+                        AND deleted = 0,
+                    #end
                 #else
                     <if test= "${column.property} != null">
                         AND ${column.name} = #{${column.property}}
