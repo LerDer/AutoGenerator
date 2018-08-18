@@ -3,87 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="9c5a5806-623d-406e-ba27-d5580651afb4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ShowDialog.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ShowDialog.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/component/PsiFileManager.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/component/PsiFileManager.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/ColumnEnum.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/ColumnEnum.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/GenerateType.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/GenerateType.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/ImportMapHolder.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/ImportMapHolder.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/TypePath.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/constant/TypePath.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Code.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Code.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Column.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Column.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Encoding.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Encoding.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Language.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Language.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/PomNamespaceContext.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/PomNamespaceContext.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Setting.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/Setting.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/SqlInfo.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/SqlInfo.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/TemplateConfig.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/domain/TemplateConfig.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/BaseGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/BaseGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/CodeAbstractGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/CodeAbstractGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/GeneratorAdaptor.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/GeneratorAdaptor.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/JavaGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/JavaGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/ScalaGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/ScalaGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaBaseDAOGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaBaseDAOGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaBaseQueryGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaBaseQueryGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaBoGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaBoGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDAOXmlGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDAOXmlGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDaoGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDaoGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDaoImplGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDaoImplGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDoGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaDoGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaManagerGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaManagerGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaManagerImplGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaManagerImplGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaPersistenceXmlGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaPersistenceXmlGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaQueryGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaQueryGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaSQLMapConfigXmlGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaSQLMapConfigXmlGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaSqlmapGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaSqlmapGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaTransferGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/java/JavaTransferGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaBaseDAOGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaBaseDAOGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaBaseQueryGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaBaseQueryGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaBoGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaBoGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDAOXmlGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDAOXmlGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDaoGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDaoGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDaoImplGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDaoImplGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDoGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaDoGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaManagerGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaManagerGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaManagerImplGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaManagerImplGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaPersistenceXmlGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaPersistenceXmlGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaQueryGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaQueryGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaSQLMapConfigXmlGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaSQLMapConfigXmlGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaSqlmapGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaSqlmapGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaTransferGenerator.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/generator/scala/ScalaTransferGenerator.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/Env.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/Env.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/PluginConfigHolder.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/PluginConfigHolder.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/PluginProjectConfigHolder.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/PluginProjectConfigHolder.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/SettingManager.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/SettingManager.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/domain/PluginConfig.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/domain/PluginConfig.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/domain/PluginProjectConfig.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/storage/domain/PluginProjectConfig.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$1.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$1.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$2.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$2.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$3.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$3.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$4.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$CheckBoxCellEditor.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$CheckBoxCellEditor.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$CheckBoxRenderer.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog$CheckBoxRenderer.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/ui/GeneratorMainDialog.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/CharsetChanger.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/CharsetChanger.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/FileEncoder.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/FileEncoder.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/FileOpener.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/FileOpener.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/FileWriter.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/FileWriter.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/Matcher.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/Matcher.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/NameUtil.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/NameUtil.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/PathHolder.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/PathHolder.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/PomAnalyzer.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/PomAnalyzer.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/RegexUtil.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/RegexUtil.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/ResourceUtil.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/ResourceUtil.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/SqlAnaly.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/SqlAnaly.class" />
       <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/TemplateUtil.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/TemplateUtil.class" />
-      <change beforePath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/TypeChanger.class" afterPath="$PROJECT_DIR$/out/cn/fishy/plugin/idea/auto/util/TypeChanger.class" />
-      <change beforePath="$PROJECT_DIR$/out/intro/res.properties" afterPath="$PROJECT_DIR$/out/intro/res.properties" />
-      <change beforePath="$PROJECT_DIR$/out/templates/java/dao.vm" afterPath="$PROJECT_DIR$/out/templates/java/dao.vm" />
-      <change beforePath="$PROJECT_DIR$/out/templates/java/do.vm" afterPath="$PROJECT_DIR$/out/templates/java/do.vm" />
       <change beforePath="$PROJECT_DIR$/out/templates/java/sqlmap.vm" afterPath="$PROJECT_DIR$/out/templates/java/sqlmap.vm" />
-      <change beforePath="$PROJECT_DIR$/resources/templates/java/dao.vm" afterPath="$PROJECT_DIR$/resources/templates/java/dao.vm" />
-      <change beforePath="$PROJECT_DIR$/resources/templates/java/do.vm" afterPath="$PROJECT_DIR$/resources/templates/java/do.vm" />
       <change beforePath="$PROJECT_DIR$/resources/templates/java/sqlmap.vm" afterPath="$PROJECT_DIR$/resources/templates/java/sqlmap.vm" />
-      <change beforePath="$PROJECT_DIR$/src/cn/fishy/plugin/idea/auto/generator/java/JavaSqlmapGenerator.java" afterPath="$PROJECT_DIR$/src/cn/fishy/plugin/idea/auto/generator/java/JavaSqlmapGenerator.java" />
       <change beforePath="$PROJECT_DIR$/src/cn/fishy/plugin/idea/auto/util/TemplateUtil.java" afterPath="$PROJECT_DIR$/src/cn/fishy/plugin/idea/auto/util/TemplateUtil.java" />
     </list>
     <ignored path="AutoGenerator.iws" />
@@ -120,18 +42,8 @@
       <file leaf-file-name="sqlmap.vm" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/templates/java/sqlmap.vm">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2088">
-              <caret line="116" column="24" lean-forward="true" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TemplateUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cn/fishy/plugin/idea/auto/util/TemplateUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-284">
-              <caret line="64" column="38" lean-forward="false" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+            <state relative-caret-position="176">
+              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -857,7 +769,7 @@
       <workItem from="1534520309568" duration="227000" />
       <workItem from="1534557495651" duration="4489000" />
       <workItem from="1534562542295" duration="76000" />
-      <workItem from="1534578123207" duration="8508000" />
+      <workItem from="1534578123207" duration="10020000" />
     </task>
     <task id="LOCAL-00001" summary="change tpl">
       <created>1439888923602</created>
@@ -1125,11 +1037,18 @@
       <option name="project" value="LOCAL" />
       <updated>1534581177515</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="代码规范,注释,优化,mapper.xml格式">
+      <created>1534605589563</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1534605589563</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94321000" />
+    <option name="totallyTimeSpent" value="95833000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1267,7 +1186,8 @@
     <MESSAGE value="Revert: 类型修改" />
     <MESSAGE value="代码规范,注释" />
     <MESSAGE value="代码规范,注释,优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="代码规范,注释,优化" />
+    <MESSAGE value="代码规范,注释,优化,mapper.xml格式" />
+    <option name="LAST_COMMIT_MESSAGE" value="代码规范,注释,优化,mapper.xml格式" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1686,16 +1606,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/fishy/plugin/idea/auto/util/TemplateUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-284">
-          <caret line="64" column="38" lean-forward="false" selection-start-line="64" selection-start-column="38" selection-end-line="64" selection-end-column="38" />
+        <state relative-caret-position="234">
+          <caret line="65" column="65" lean-forward="true" selection-start-line="65" selection-start-column="65" selection-end-line="65" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/templates/java/sqlmap.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2088">
-          <caret line="116" column="24" lean-forward="true" selection-start-line="116" selection-start-column="24" selection-end-line="116" selection-end-column="24" />
+        <state relative-caret-position="176">
+          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>

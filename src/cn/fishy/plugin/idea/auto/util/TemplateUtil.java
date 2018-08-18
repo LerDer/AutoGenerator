@@ -62,8 +62,8 @@ public class TemplateUtil {
         }
         StringWriter sw = new StringWriter();
         try {
-            //转换输出, 去除velocity代码缩进的空格符
-            velocityEngine.evaluate(context, sw, "", tplContent.replaceAll("[ ]*(#if|#else|#elseif|#end|#set|#foreach)", "$1"));
+            //转换输出, 去除velocity代码缩进的空格符 tplContent.replaceAll("[ ]*(#if|#else|#elseif|#end|#set|#foreach)", "$1")
+            velocityEngine.evaluate(context, sw, "", tplContent);
         } catch (Exception e) {
             e.printStackTrace();
         }
