@@ -1,5 +1,6 @@
 package cn.fishy.plugin.idea.auto.util;
 
+import static java.util.regex.Pattern.*;
 import cn.fishy.plugin.idea.auto.domain.PomNamespaceContext;
 import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Document;
@@ -15,10 +16,6 @@ import javax.xml.xpath.XPathFactory;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * User: duxing
- * Date: 2015.07.26 23:51
- */
 public class PomAnalyzer {
 
     private Document doc;
@@ -39,11 +36,11 @@ public class PomAnalyzer {
         }
     }
 
-    public String getValueByXPath(String xpathExpression) {
+    private String getValueByXPath(String xpathExpression) {
         String result = "";
         try {
             XPathExpression expr = xpath.compile(xpathExpression);
-            Node node = (Node)expr.evaluate(this.doc, XPathConstants.NODE);
+            Node node = (Node) expr.evaluate(this.doc, XPathConstants.NODE);
             if (node != null) {
                 result = node.getTextContent();
             }
@@ -66,18 +63,18 @@ public class PomAnalyzer {
     }
 
 
-    public String getDirectory(String xpath, String backPropertyName) {
+    private String getDirectory(String xpath, String backPropertyName) {
         return getDirectory(xpath, backPropertyName, null);
     }
 
-    public String getDirectory(String xpath, String backPropertyName, String defaultValue) {
+    private String getDirectory(String xpath, String backPropertyName, String defaultValue) {
         String directoryPropertySet = null;
         String directory = getValueByXPath(xpath);
         //当可以搜索到路径位置
         if (StringUtils.isNotBlank(directory)) {
             //则查询是否是参数配置
             if (directory.contains("${")) {
-                Pattern pattern = Pattern.compile("\\$\\{([^\\}]*)\\}");
+                Pattern pattern = compile("\\$\\{([^}]*)}");
                 Matcher m = pattern.matcher(directory);
                 if (m.find()) {
                     String propertyName = m.group(1);

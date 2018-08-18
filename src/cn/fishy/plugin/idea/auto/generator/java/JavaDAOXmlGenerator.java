@@ -10,10 +10,6 @@ import cn.fishy.plugin.idea.auto.util.NameUtil;
 
 import java.util.Map;
 
-/**
- * User: duxing
- * Date: 2015-08-17 00:39
- */
 public class JavaDAOXmlGenerator extends BaseGenerator implements DAOXmlGenerator {
 
     @Override
@@ -28,10 +24,10 @@ public class JavaDAOXmlGenerator extends BaseGenerator implements DAOXmlGenerato
 
     @Override
     public String generate(String daoClassName, String daoImplClassName) {
-        Map<String,Object> map = initMap();
-        map.put("daoClassName",daoClassName);
+        Map<String, Object> map = initMap();
+        map.put("daoClassName", daoClassName);
         map.put("daoPropertyName", NameUtil.lowFirst(daoClassName));
-        map.put("daoImplClassName",daoImplClassName);
+        map.put("daoImplClassName", daoImplClassName);
         Setting setting = SettingManager.get();
         map.put("encoding", setting.getEncoding());
         return generate(map);

@@ -45,7 +45,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +58,6 @@ public class GeneratorMainDialog extends JDialog {
      * overall
      */
     private JPanel contentPane;
-//    private JButton BTN_exit;
     private JTextPane TEXT_msg;
 
 
@@ -167,12 +165,12 @@ public class GeneratorMainDialog extends JDialog {
 //        INPUT_sql.setBackground(background);
 //        TAB_PANEL.setBackground(background);
 //        INPUT_sql.setText(new String(sql.getBytes(Charset.forName("UTF-8")), getIDECharset()));
-        if(pluginProjectConfig!=null) {
+        if (pluginProjectConfig != null) {
             INPUT_sql.setText(pluginProjectConfig.sql);
         }
         final Setting setting = SettingManager.get();
 
-        applySettings(setting,false);
+        applySettings(setting, false);
         showTplSelect();
 
 /*
@@ -234,7 +232,7 @@ public class GeneratorMainDialog extends JDialog {
         BTN_tplInit.addActionListener(e -> {
             String tplPath = INPUT_tplPath.getText();
             boolean r = checkTplPath(tplPath);
-            if(r){
+            if (r) {
                 initTemplates(tplPath);
             }
         });
@@ -272,7 +270,8 @@ public class GeneratorMainDialog extends JDialog {
             try {
                 Desktop.getDesktop().browse(
                         new java.net.URI(INPUT_tddl_url.getText()));
-            }catch (Exception e1){}
+            } catch (Exception e1) {
+            }
         });
         //step2 - generate codes
 
@@ -287,28 +286,22 @@ public class GeneratorMainDialog extends JDialog {
         });
 
 // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
 
     }
 
     private void initTemplates(String tplPath) {
         StringBuilder tplPathBuilder = new StringBuilder(tplPath);
-        for(Code c:Code.values()) {
-            if(!tplPathBuilder.toString().endsWith("/")){
+        for (Code c : Code.values()) {
+            if (!tplPathBuilder.toString().endsWith("/")) {
                 tplPathBuilder.append("/");
             }
             String path = tplPathBuilder + c.getTplPath();
             System.out.println(path);
             checkThePath(path);
             for (GenerateType gt : GenerateType.values()) {
-                if(gt.equals(GenerateType.ALL)) {
+                if (gt.equals(GenerateType.ALL)) {
                     continue;
                 }
                 String name = gt.getName().toLowerCase();
@@ -316,21 +309,21 @@ public class GeneratorMainDialog extends JDialog {
                 String content = null;
                 try {
                     content = TemplateUtil.getOriginTplContent(c, gt);
-                    if(content==null) {
-                        content="";
+                    if (content == null) {
+                        content = "";
                     }
                     File f1 = new File(file);
-                    if(f1.exists()) {
-                        String c1 = FileUtil.loadFile(f1,"UTF-8");
-                        if(stringEqual(c1,content)){
+                    if (f1.exists()) {
+                        String c1 = FileUtil.loadFile(f1, "UTF-8");
+                        if (stringEqual(c1, content)) {
                             continue;
-                        }else{
-                            renameFile(f1,0);
+                        } else {
+                            renameFile(f1, 0);
                         }
                     }
-                    FileUtil.writeToFile(f1,content);
+                    FileUtil.writeToFile(f1, content);
                 } catch (Exception e) {
-                    logger.error("ERROR TO SAVE FILE: "+ file + ", content: "+content,e);
+                    logger.error("ERROR TO SAVE FILE: " + file + ", content: " + content, e);
                 }
             }
             TEXT_msg.setText("tpl inited!");
@@ -339,20 +332,19 @@ public class GeneratorMainDialog extends JDialog {
     }
 
     private boolean stringEqual(String c1, String content) {
-//       return  c1.replaceAll("\\s","").equals(content.replaceAll("\\s",""));
-       return  c1.equals(content);
+        return c1.equals(content);
     }
 
     private void renameFile(File f1, int i) {
         String p1 = f1.getPath();
-        File f2 = new File(p1+"_bak"+i);
-        if(f2.exists()){
-            i=i+1;
-            renameFile(f1,i);
-        }else{
+        File f2 = new File(p1 + "_bak" + i);
+        if (f2.exists()) {
+            i = i + 1;
+            renameFile(f1, i);
+        } else {
             boolean r = f1.renameTo(f2);
-            if(!r){
-                logger.error("RENAME FILE ERROR:"+f2.getPath());
+            if (!r) {
+                logger.error("RENAME FILE ERROR:" + f2.getPath());
             }
         }
     }
@@ -363,19 +355,19 @@ public class GeneratorMainDialog extends JDialog {
             if (!f.exists()) {
                 f.mkdirs();
             }
-        }catch (Exception e){
-            logger.error("mkdirs ERROR",e);
+        } catch (Exception e) {
+            logger.error("mkdirs ERROR", e);
         }
     }
 
     private boolean checkTplPath(String tplPath) {
-        if(tplPath==null || "".equals(tplPath.trim())){
+        if (tplPath == null || "".equals(tplPath.trim())) {
             TEXT_msg.setText("please set the custom tpl path!");
             return false;
-        }else{
+        } else {
             File file = new File(tplPath);
             boolean r = file.isDirectory();
-            if(!r){
+            if (!r) {
                 TEXT_msg.setText("the custom tpl path is not a directory!");
             }
             return r;
@@ -399,8 +391,9 @@ public class GeneratorMainDialog extends JDialog {
     private void checkGenerateBase() {
         boolean r = CHK_generateBase.isSelected();
         BTN_basedao.setVisible(r);
-        BTN_basequery.setVisible(r&&CHK_pageQuery.isSelected());
+        BTN_basequery.setVisible(r && CHK_pageQuery.isSelected());
     }
+
     private void applySwitch() {
         SettingManager.applySwitch(CHK_managerUseBO.isSelected(), CHK_daoLogicDel.isSelected(), CHK_daoUseSeq.isSelected(), CHK_pageQuery.isSelected(), CHK_overwrite.isSelected(), CHK_generateBase.isSelected());
     }
@@ -410,60 +403,61 @@ public class GeneratorMainDialog extends JDialog {
         String c = e.getActionCommand();
         // ["Generate","DO"]
         String[] a = c.split(" ");
-        if(a.length==2){
+        if (a.length == 2) {
             String t = a[1];
             generate(t);
-        }else if(a.length==1){
-            if(a[0].endsWith("-sample.xml")){
-                a[0] = a[0].replace("-sample","");
+        } else if (a.length == 1) {
+            if (a[0].endsWith("-sample.xml")) {
+                a[0] = a[0].replace("-sample", "");
             }
             generate(a[0]);
         }
     }
+
     //targetCode == "DO", "BO", "SQLMap" ....
     private void generate(String targetCode) {
         GenerateType gt = get(targetCode);
-        if(gt==null){
+        if (gt == null) {
             TEXT_msg.setText("can't recognize your action!");
             return;
         }
-        if(jtable==null){
+        if (jtable == null) {
             TEXT_msg.setText("please input sql at \"Input\" TAB and click analy!");
             TAB_PANEL.setSelectedIndex(0);
             return;
         }
-        if(!checkOutputPath()){
+        if (!checkOutputPath()) {
             TEXT_msg.setText("please set output path!");
             return;
         }
-        String code = (String)SELECT_code.getSelectedItem();
-        String encoding = (String)SELECT_encoding.getSelectedItem();
+        String code = (String) SELECT_code.getSelectedItem();
+        String encoding = (String) SELECT_encoding.getSelectedItem();
         //获取表格中的数据
         List<Column> doColumnList = getDOColumns();
         List<Column> queryColumnList = getQueryColumns();
         String tableName = INPUT_tableName.getText();
-        if(tableName==null||tableName.trim().equals("")){
+        if (tableName == null || tableName.trim().equals("")) {
             TEXT_msg.setText("table name need set!");
             return;
         }
 
-        if(StringUtils.isBlank(code) || StringUtils.isBlank(encoding)){
+        if (StringUtils.isBlank(code) || StringUtils.isBlank(encoding)) {
             TEXT_msg.setText("code and encoding need to select!");
             return;
         }
 
-        if("DO".equals(targetCode)){
-            if(doColumnList.size()>0){
+        if ("DO".equals(targetCode)) {
+            if (doColumnList.size() > 0) {
 
-            }else{
+            } else {
                 TEXT_msg.setText("please choose DO columns!");
                 return;
             }
         }
-        if("Query".equals(targetCode)){
-            if(doColumnList.size()>0){
+        if ("Query".equals(targetCode)) {
+            if (doColumnList.size() > 0) {
 
-            }else{
+            } else {
                 TEXT_msg.setText("please choose Query columns!");
                 return;
             }
@@ -476,7 +470,7 @@ public class GeneratorMainDialog extends JDialog {
         Setting setting = SettingManager.get();
         Env.encodeFrom = Env.getProjectCharset();
         Env.encodeTo = Charset.forName(encoding);
-        GeneratorAdaptor generatorAdaptor = new GeneratorAdaptor(tableName,path,code);
+        GeneratorAdaptor generatorAdaptor = new GeneratorAdaptor(tableName, path, code);
         generatorAdaptor.setColumnList(doColumnList, queryColumnList);
         generatorAdaptor.setPrimaryColumn(primaryColumn);
 
@@ -484,101 +478,102 @@ public class GeneratorMainDialog extends JDialog {
         boolean r = false;
         String rs = "";
         // lww: 生成入口
-        switch(gt){
+        switch (gt) {
             case DO:
-                r =generatorAdaptor.generateDO();
+                r = generatorAdaptor.generateDO();
                 break;
-            case Query :
-                r =generatorAdaptor.generateQuery();
+            case Query:
+                r = generatorAdaptor.generateQuery();
                 break;
             case DAO:
-                r =generatorAdaptor.generateDAO();
+                r = generatorAdaptor.generateDAO();
                 break;
             case DAOImpl:
-                r =generatorAdaptor.generateDAOImpl();
+                r = generatorAdaptor.generateDAOImpl();
                 break;
             case BO:
-                r =generatorAdaptor.generateBO();
+                r = generatorAdaptor.generateBO();
                 break;
             case Transfer:
-                r =generatorAdaptor.generateTransfer();
+                r = generatorAdaptor.generateTransfer();
                 break;
             case Manager:
-                r =generatorAdaptor.generateManager();
+                r = generatorAdaptor.generateManager();
                 break;
             case ManagerImpl:
-                r =generatorAdaptor.generateManagerImpl();
+                r = generatorAdaptor.generateManagerImpl();
                 break;
             case SQLMap:
-                r =generatorAdaptor.generateSqlmap();
+                r = generatorAdaptor.generateSqlmap();
                 break;
             case BaseDAO:
-                r =generatorAdaptor.generateBaseDAO();
+                r = generatorAdaptor.generateBaseDAO();
                 break;
             case BaseQuery:
-                r =generatorAdaptor.generateBaseQuery();
+                r = generatorAdaptor.generateBaseQuery();
                 break;
             case DAOXml:
-                r =generatorAdaptor.generateDAOXml();
+                r = generatorAdaptor.generateDAOXml();
                 break;
             case PersistenceXml:
-                r =generatorAdaptor.generatePersistenceXml();
+                r = generatorAdaptor.generatePersistenceXml();
                 break;
             case SQLMapConfigXml:
-                r =generatorAdaptor.generateSQLMapConfigXml();
+                r = generatorAdaptor.generateSQLMapConfigXml();
                 break;
             case ALL:
-                r =generatorAdaptor.generateDO();
+                r = generatorAdaptor.generateDO();
                 rs = getE(rs, r, GenerateType.DO.getName());
-                r =generatorAdaptor.generateQuery();
+                r = generatorAdaptor.generateQuery();
                 rs = getE(rs, r, GenerateType.Query.getName());
-                r =generatorAdaptor.generateDAO();
+                r = generatorAdaptor.generateDAO();
                 rs = getE(rs, r, GenerateType.DAO.getName());
-                r =generatorAdaptor.generateDAOImpl();
+                r = generatorAdaptor.generateDAOImpl();
                 rs = getE(rs, r, GenerateType.DAOImpl.getName());
-                r =generatorAdaptor.generateManager();
+                r = generatorAdaptor.generateManager();
                 rs = getE(rs, r, GenerateType.Manager.getName());
-                r =generatorAdaptor.generateManagerImpl();
+                r = generatorAdaptor.generateManagerImpl();
                 rs = getE(rs, r, GenerateType.ManagerImpl.getName());
-                r =generatorAdaptor.generateSqlmap();
+                r = generatorAdaptor.generateSqlmap();
                 rs = getE(rs, r, GenerateType.SQLMap.getName());
-                if(setting.isManagerUseBO()){
-                    r =generatorAdaptor.generateBO();
+                if (setting.isManagerUseBO()) {
+                    r = generatorAdaptor.generateBO();
                     rs = getE(rs, r, GenerateType.BO.getName());
-                    r =generatorAdaptor.generateTransfer();
+                    r = generatorAdaptor.generateTransfer();
                     rs = getE(rs, r, GenerateType.Transfer.getName());
                 }
-                if(setting.isGenerateBase()){
-                    r =generatorAdaptor.generateBaseDAO();
+                if (setting.isGenerateBase()) {
+                    r = generatorAdaptor.generateBaseDAO();
                     rs = getE(rs, r, GenerateType.BaseDAO.getName());
-                    if(setting.isPagerQuery()) {
+                    if (setting.isPagerQuery()) {
                         r = generatorAdaptor.generateBaseQuery();
                         rs = getE(rs, r, GenerateType.BaseQuery.getName());
                     }
                 }
                 break;
         }
-        if(gt.equals(ALL)){
-            TEXT_msg.setText("generate ALL done"+(!rs.equals("")?", But generate "+rs+" error!":""));
-        }else {
-            TEXT_msg.setText("generate " + (TypePath.RESOURCES.equals(gt.getTypePath())&&!gt.equals(GenerateType.SQLMap)?gt.getSuffix()+".xml":gt.getName()) + " " + (r ? "success" : "error" + ":" + FileWriter.getMsg()) + "!");
+        if (gt.equals(ALL)) {
+            TEXT_msg.setText("generate ALL done" + (!"".equals(rs) ? ", But generate " + rs + " error!" : ""));
+        } else {
+            TEXT_msg.setText("generate " + (TypePath.RESOURCES.equals(gt.getTypePath()) && !gt.equals(GenerateType.SQLMap) ? gt.getSuffix() + ".xml" : gt.getName()) + " " + (r ? "success" : "error" + ":" + FileWriter.getMsg()) + "!");
         }
     }
 
     private String getE(String rs, boolean r, String str) {
-        if(!r){
-            if(StringUtils.isNotBlank(rs)){
-                rs+=", ";
+        if (!r) {
+            if (StringUtils.isNotBlank(rs)) {
+                rs += ", ";
             }
-            rs+=str;
+            rs += str;
         }
         return rs;
     }
 
 
-    private String getBody(String content){
-        return "<html><body>"+content+"</body></html>";
+    private String getBody(String content) {
+        return "<html><body>" + content + "</body></html>";
     }
+
     private List<Column> getDOColumns() {
         return getColumns(ColumnEnum.DO);
     }
@@ -588,12 +583,12 @@ public class GeneratorMainDialog extends JDialog {
     }
 
     private List<Column> getColumns(ColumnEnum columnEnum) {
-        List<Column> list = new ArrayList<Column>();
+        List<Column> list = new ArrayList<>();
         TableModel tm = jtable.getModel();
         int count = tm.getRowCount();
-        for(int i=0;i<count;i++){
+        for (int i = 0; i < count; i++) {
             Boolean a = (Boolean) tm.getValueAt(i, columnEnum.getOrder());
-            if(a){
+            if (a) {
                 try {
                     Column c = new Column();
                     c.setName(((String) tm.getValueAt(i, ColumnEnum.Column.getOrder())).toLowerCase());
@@ -601,12 +596,12 @@ public class GeneratorMainDialog extends JDialog {
                     c.setType((String) tm.getValueAt(i, ColumnEnum.CodeType.getOrder()));
                     c.setIsPrimaryKey("Y".equals((String) tm.getValueAt(i, ColumnEnum.Primary.getOrder())));
                     String comt = (String) tm.getValueAt(i, ColumnEnum.Comment.getOrder());
-                    c.setComment(StringUtils.isBlank(comt)?c.getProperty():comt);
-                    if(c.isPrimaryKey()){
+                    c.setComment(StringUtils.isBlank(comt) ? c.getProperty() : comt);
+                    if (c.isPrimaryKey()) {
                         primaryColumn = c;
                     }
                     list.add(c);
-                }catch (Exception e){
+                } catch (Exception e) {
                     //ignore
                 }
             }
@@ -614,68 +609,80 @@ public class GeneratorMainDialog extends JDialog {
         return list;
     }
 
-    public boolean checkOutputPath(){
+    private boolean checkOutputPath() {
         path = INPUT_path.getText();
         File f = new File(path);
         return f.isDirectory();
     }
 
 
-    private void applySettings(Setting setting , boolean isSetting) {
+    private void applySettings(Setting setting, boolean isSetting) {
         INPUT_path.setText(setting.getPath());
-        if(setting.getCode().equals(Code.SCALA.getName())){
-            if(!isSetting){
+        if (setting.getCode().equals(Code.SCALA.getName())) {
+            if (!isSetting) {
                 RADIO_codeJava.setSelected(false);
                 RADIO_codeScala.setSelected(true);
             }
             SELECT_code.setSelectedItem("SCALA");
-        }else{
-            if(!isSetting) {
+        } else {
+            if (!isSetting) {
                 RADIO_codeJava.setSelected(true);
                 RADIO_codeScala.setSelected(false);
             }
             SELECT_code.setSelectedItem("JAVA");
         }
 
-        if(setting.getEncoding().equals(Encoding.GBK.getName())){
-            if(!isSetting) {
+        if (setting.getEncoding().equals(Encoding.GBK.getName())) {
+            if (!isSetting) {
                 RADIO_encodeUTF8.setSelected(false);
                 RADIO_encodeGBK.setSelected(true);
             }
             SELECT_encoding.setSelectedItem("GBK");
-        }else{
-            if(!isSetting) {
+        } else {
+            if (!isSetting) {
                 RADIO_encodeUTF8.setSelected(true);
                 RADIO_encodeGBK.setSelected(false);
             }
             SELECT_encoding.setSelectedItem("UTF-8");
         }
 
-        if(Language.CHS.getName().equals(setting.getLanguage())){
-            if(!isSetting) {
+        if (Language.CHS.getName().equals(setting.getLanguage())) {
+            if (!isSetting) {
                 RADIO_languageEn.setSelected(false);
                 RADIO_languageChs.setSelected(true);
             }
-        }else{
-            if(!isSetting) {
+        } else {
+            if (!isSetting) {
                 RADIO_languageEn.setSelected(true);
                 RADIO_languageChs.setSelected(false);
             }
         }
-        if(setting.getTplUseCustom()!=null){
+        if (setting.getTplUseCustom() != null) {
             CHK_useCustomTpl.setSelected(setting.getTplUseCustom());
         }
-        if(setting.getTplPath()!=null && !setting.getTplPath().equals("")) {
+        if (setting.getTplPath() != null && !"".equals(setting.getTplPath())) {
             INPUT_tplPath.setText(setting.getTplPath());
         }
-        if(!isSetting) {
+        if (!isSetting) {
             INPUT_author.setText(setting.getAuthor());
-            if(setting.isOverwrite()!=null){CHK_overwrite.setSelected(setting.isOverwrite());}
-            if(setting.isGenerateBase()!=null){CHK_generateBase.setSelected(setting.isGenerateBase());}
-            if(setting.isDaoLogicDelete()!=null){CHK_daoLogicDel.setSelected(setting.isDaoLogicDelete());}
-            if(setting.isDaoUseSequence()!=null){CHK_daoUseSeq.setSelected(setting.isDaoUseSequence());}
-            if(setting.isManagerUseBO()!=null){CHK_managerUseBO.setSelected(setting.isManagerUseBO());}
-            if(setting.isPagerQuery()!=null){CHK_pageQuery.setSelected(setting.isPagerQuery());}
+            if (setting.isOverwrite() != null) {
+                CHK_overwrite.setSelected(setting.isOverwrite());
+            }
+            if (setting.isGenerateBase() != null) {
+                CHK_generateBase.setSelected(setting.isGenerateBase());
+            }
+            if (setting.isDaoLogicDelete() != null) {
+                CHK_daoLogicDel.setSelected(setting.isDaoLogicDelete());
+            }
+            if (setting.isDaoUseSequence() != null) {
+                CHK_daoUseSeq.setSelected(setting.isDaoUseSequence());
+            }
+            if (setting.isManagerUseBO() != null) {
+                CHK_managerUseBO.setSelected(setting.isManagerUseBO());
+            }
+            if (setting.isPagerQuery() != null) {
+                CHK_pageQuery.setSelected(setting.isPagerQuery());
+            }
             checkGenerateBase();
             checkManagerUseBO();
         }
@@ -683,20 +690,20 @@ public class GeneratorMainDialog extends JDialog {
 
     private void onAnaly() {
         String text = INPUT_sql.getText();
-        if(StringUtils.isBlank(text+"".trim())){
+        if (StringUtils.isBlank(text + "".trim())) {
             TEXT_msg.setText("no sql detected!");
         }
 
-        SqlInfo sqlInfo  = SqlAnaly.analy(text);
-        if(sqlInfo.isValid()) {
+        SqlInfo sqlInfo = SqlAnaly.analy(text);
+        if (sqlInfo.isValid()) {
             PluginProjectConfig pluginProjectConfig = PluginProjectConfigHolder.getPluginProjectConfig();
-            if(pluginProjectConfig!=null){
+            if (pluginProjectConfig != null) {
                 pluginProjectConfig.sql = text;
             }
             showNextTab(sqlInfo);
             TAB_PANEL.setSelectedIndex(1);
             TEXT_msg.setText("");
-        }else{
+        } else {
             TEXT_msg.setText("no sql detected or sql is not supported!");
         }
     }
@@ -704,11 +711,11 @@ public class GeneratorMainDialog extends JDialog {
     private void showNextTab(SqlInfo sqlInfo) {
         List<Column> list = sqlInfo.getColumnList();
         int num = 0;
-        List<Object[]> list2 = new ArrayList<Object[]>();
-        if(list!=null && list.size()>0) {
+        List<Object[]> list2 = new ArrayList<>();
+        if (list != null && list.size() > 0) {
             for (Column c : list) {
-                if(c!=null) {
-                    List<Object> list1 = new ArrayList<Object>();
+                if (c != null) {
+                    List<Object> list1 = new ArrayList<>();
                     num++;
                     list1.add(num);
                     list1.add(Boolean.TRUE);
@@ -728,6 +735,7 @@ public class GeneratorMainDialog extends JDialog {
             TableModel model = new DefaultTableModel(data, colNames) {
                 private static final long serialVersionUID = -7378767624104445787L;
 
+                @Override
                 public boolean isCellEditable(int rowIndex, int colIndex) {
                     if (colIndex == 0 || colIndex == 3 || colIndex == 4 || colIndex == 7) { //相应的列不可编辑
                         return false;
@@ -741,7 +749,7 @@ public class GeneratorMainDialog extends JDialog {
             //No.列尝试不同的前景色
             TableColumn tableColumn = jtable.getColumn(ColumnEnum.No.getName());
             DefaultTableCellRenderer cellRender = new DefaultTableCellRenderer();
-//        cellRender.setForeground(colorScheme.getDefaultForeground());
+            //cellRender.setForeground(colorScheme.getDefaultForeground());
             cellRender.setHorizontalAlignment(SwingConstants.CENTER);
             tableColumn.setCellRenderer(cellRender);
             tableColumn.setPreferredWidth(30);
@@ -773,19 +781,21 @@ public class GeneratorMainDialog extends JDialog {
     class CheckBoxRenderer extends JCheckBox implements TableCellRenderer {
         private static final long serialVersionUID = 1L;
         Border border = new EmptyBorder(1, 2, 1, 2);
-        public CheckBoxRenderer() {
+
+        private CheckBoxRenderer() {
             super();
             setOpaque(true);
             setHorizontalAlignment(SwingConstants.CENTER);
         }
 
-        @Override public Component getTableCellRendererComponent(
-                JTable  table,
-                Object  value,
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table,
+                Object value,
                 boolean isSelected,
                 boolean hasFocus,
-                int     row,
-                int     column) {
+                int row,
+                int column) {
             if (value instanceof Boolean) {
                 setSelected((Boolean) value);
                 // setEnabled(table.isCellEditable(row, column));
@@ -798,21 +808,26 @@ public class GeneratorMainDialog extends JDialog {
 
     class CheckBoxCellEditor extends AbstractCellEditor implements TableCellEditor {
         private static final long serialVersionUID = 1L;
-        protected JCheckBox checkBox;
-        public CheckBoxCellEditor() {
+        private JCheckBox checkBox;
+
+        private CheckBoxCellEditor() {
             checkBox = new JCheckBox();
             checkBox.setHorizontalAlignment(SwingConstants.CENTER);
             // checkBox.setBackground( Color.white);
         }
-        @Override public Object getCellEditorValue() {
+
+        @Override
+        public Object getCellEditorValue() {
             return checkBox.isSelected();
         }
-        @Override public Component getTableCellEditorComponent(
-                JTable  table,
-                Object  value,
+
+        @Override
+        public Component getTableCellEditorComponent(
+                JTable table,
+                Object value,
                 boolean isSelected,
-                int     row,
-                int     column) {
+                int row,
+                int column) {
             checkBox.setSelected((Boolean) value);
             return checkBox;
         }
@@ -821,21 +836,21 @@ public class GeneratorMainDialog extends JDialog {
     private void onApply() {
         String author = INPUT_author.getText();
         Encoding encoding = Encoding.UTF8;
-        if(RADIO_encodeGBK.isSelected()){
+        if (RADIO_encodeGBK.isSelected()) {
             encoding = Encoding.GBK;
         }
         Code code = Code.JAVA;
-        if(RADIO_codeScala.isSelected()){
+        if (RADIO_codeScala.isSelected()) {
             code = Code.SCALA;
         }
-        Setting settingSave = new Setting(author,encoding,code);
+        Setting settingSave = new Setting(author, encoding, code);
         boolean useTpl = CHK_useCustomTpl.isSelected();
         settingSave.setTplUseCustom(useTpl);
-        if(useTpl) {
+        if (useTpl) {
             String tp = INPUT_tplPath.getText();
-            if(tp==null || tp.trim().equals("")){
+            if (tp == null || "".equals(tp.trim())) {
                 TEXT_msg.setText("please set the custom tpl path!");
-            }else{
+            } else {
                 settingSave.setTplPath(tp);
             }
         }
@@ -843,13 +858,14 @@ public class GeneratorMainDialog extends JDialog {
         SettingManager.applyApp(settingSave);
         TEXT_msg.setText("apply success!");
 
-//        applySettings(settingSave, true);
+        //applySettings(settingSave, true);
     }
 
     private void onCancel() {
-// add your code here if necessary
+        // add your code here if necessary
         dispose();
     }
+
     public static void main(String[] args) throws Exception {
         GeneratorMainDialog dialog = new GeneratorMainDialog();
         dialog.pack();

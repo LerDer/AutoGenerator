@@ -18,10 +18,6 @@ import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * User: duxing
- * Date: 2015.08.15 1:50
- */
 public class TemplateUtil {
 
     public static String encoding = "UTF-8";
@@ -49,7 +45,7 @@ public class TemplateUtil {
     }
 
     @Nullable
-    public static String getOriginTplContent(String vmTplPath) {
+    private static String getOriginTplContent(String vmTplPath) {
         return ResourceUtil.load(vmTplPath,encoding,TemplateUtil.class);
     }
 
@@ -58,7 +54,7 @@ public class TemplateUtil {
         return ResourceUtil.load(TemplateConfig.getOriginTemplate(code,generateType),encoding,TemplateUtil.class);
     }
 
-    public static String parse(String tplContent, Map<String,Object> contextMap) {
+    private static String parse(String tplContent, Map<String, Object> contextMap) {
         VelocityEngine velocityEngine = new VelocityEngine();
         VelocityContext context = new VelocityContext();
         for(String k : contextMap.keySet()){

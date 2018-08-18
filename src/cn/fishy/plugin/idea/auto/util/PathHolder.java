@@ -7,17 +7,12 @@ import cn.fishy.plugin.idea.auto.domain.Code;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 路径工具类
- * User: duxing
- * Date: 2015.08.13 23:17
- */
 public class PathHolder {
     public static String path;
     public static Code code;
 
-    public static String pkg;
-    public static String javaPath;
+    private static String pkg;
+    private static String javaPath;
     public static String resourcesPath;
 
     private static List<String> webTailList = new ArrayList<String>();
@@ -30,7 +25,7 @@ public class PathHolder {
     }
 
     public static void init(String path, Code code) {
-        PathHolder.path = path.replaceAll("\\"+Env.sp,"/");
+        PathHolder.path = path.replaceAll(String.format("\\%s", Env.sp),"/");
         PathHolder.code = code;
         analyJavaPath(path);
     }
@@ -58,7 +53,7 @@ public class PathHolder {
         String projectPath = "";
         try {
             projectPath = Env.project.getBasePath();
-        }catch (Exception e){
+        }catch (Exception ignored){
         }
         String tmpPath = path;
         if(projectPath!=null && path.startsWith(projectPath)){
@@ -95,18 +90,18 @@ public class PathHolder {
         PathHolder.resourcesPath = projectPath+path.substring(0,last)+"/resources/";
     }
 
-    public static String pkg(String path){
+    private static String pkg(String path){
         if(path.startsWith("/")){
             path = path.substring(1);
         }
         if(path.endsWith("/")){
             path = path.substring(0,path.length()-1);
         }
-        return path.replaceAll("\\/",".");
+        return path.replaceAll("/",".");
     }
 
     private static String local(String path){
-        return path.replaceAll("\\/","\\"+ Env.sp);
+        return path.replaceAll("/","\\"+ Env.sp);
     }
 
     public static String pkg(GenerateType generateType){

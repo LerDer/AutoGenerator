@@ -8,10 +8,6 @@ import com.intellij.psi.PsiFile;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * User: duxing
- * Date: 2015.08.13 23:53
- */
 public class FileWriter {
     private static String msg;
     public static boolean write(String filePath, String fileNameWithExt, byte[] contentByte){
@@ -42,7 +38,7 @@ public class FileWriter {
         return msg;
     }
 
-    public static void setMsg(String msg) {
+    private static void setMsg(String msg) {
         FileWriter.msg = msg;
     }
 

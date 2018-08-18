@@ -2,14 +2,11 @@ package cn.fishy.plugin.idea.auto.util;
 
 import java.util.regex.Pattern;
 
-/**
- * 内容匹配类
- * User: duxing
- * Date: 2015.07.26 23:51
- */
 public class RegexUtil {
     public static Pattern[] compilePatterns(String[] inputs) {
-        if (inputs == null) return null;
+        if (inputs == null) {
+            return null;
+        }
         Pattern[] patterns = new Pattern[inputs.length];
         for (int i = 0; i < inputs.length; i++) {
             inputs[i] = escapeStringLiteralForWildCard(inputs[i].trim());
@@ -22,10 +19,6 @@ public class RegexUtil {
 
     /**
      * 判断传入的uri是否满足patter
-     *
-     * @param exclusionPatterns
-     * @param uri
-     * @return
      */
     public static boolean isMatched(Pattern[] exclusionPatterns, String uri) {
         if (exclusionPatterns != null) {
@@ -42,16 +35,15 @@ public class RegexUtil {
     /**
      * 对指定的文本进行模糊匹配，支持* 和?，不区分大小写
      *
-     * @param text 要进行模糊匹配的文本
+     * @param text    要进行模糊匹配的文本
      * @param pattern 模糊匹配表达式
-     * @return
      */
-    public static boolean isWildCardMatched(String text, Pattern pattern) {
+    private static boolean isWildCardMatched(String text, Pattern pattern) {
         java.util.regex.Matcher m = pattern.matcher(text);
         return m.matches();
     }
 
-    public static String escapeStringLiteralForWildCard(String original) {
+    private static String escapeStringLiteralForWildCard(String original) {
         if (original == null) {
             return null;
         }

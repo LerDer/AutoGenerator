@@ -11,15 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: duxing
- * Date: 2015.08.13 1:35
- */
 public class JavaTransferGenerator extends BaseGenerator implements TransferGenerator {
     @Override
     public String generate(String doClassName, String boClassName, String transferClassName, List<Column> columnList) {
-        Map<String,Object> map = initMap();
-        map.put("doClassName",doClassName);
+        Map<String, Object> map = initMap();
+        map.put("doClassName", doClassName);
         map.put("boClassName", boClassName);
         map.put("transferClassName", transferClassName);
         map.put("columnList", columnList);

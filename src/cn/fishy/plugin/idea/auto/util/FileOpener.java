@@ -8,10 +8,6 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 
 import java.io.File;
 
-/**
- * User: duxing
- * Date: 2015.08.17 23:25
- */
 public class FileOpener {
     public static void openFile(File f){
         try {

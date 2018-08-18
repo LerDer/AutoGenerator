@@ -3,30 +3,25 @@ package cn.fishy.plugin.idea.auto.util;
 import cn.fishy.plugin.idea.auto.constant.GenerateType;
 import org.apache.commons.lang.StringUtils;
 
-/**
- * 名称工具类
- * User: duxing
- * Date: 2015.08.13 23:17
- */
 public class NameUtil {
-    public static String toWords(String name) {
+    private static String toWords(String name) {
         return name.replaceAll("_", " ");
     }
 
-    public static String formatName(String name) {
+    private static String formatName(String name) {
         return upFirstAll(toWords(name.toLowerCase())).replaceAll(" ", "");
     }
 
-    public static String upFirstAll(String s) {
+    private static String upFirstAll(String s) {
         s = s.trim().replaceAll("\\s", " ");
         String[] sa = s.split(" ");
-        String r = "";
+        StringBuilder r = new StringBuilder();
         for (String o : sa) {
             if (StringUtils.isNotBlank(o)) {
-                r += upFirst(o);
+                r.append(upFirst(o));
             }
         }
-        return r;
+        return r.toString();
     }
 
     public static String upFirst(String o) {

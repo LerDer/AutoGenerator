@@ -12,24 +12,20 @@ import cn.fishy.plugin.idea.auto.storage.SettingManager;
 import java.util.List;
 import java.util.Map;
 
-/**
- * User: duxing
- * Date: 2015.08.13 1:34
- */
 public class JavaSqlmapGenerator extends BaseGenerator implements SqlmapGenerator {
 
     @Override
     public String generate(String tableName, Column primaryKeyColumn, String doClassName, String daoClassName, List<Column> columnList, List<Column> columnQueryList) {
-        Map<String,Object> map = initMap();
-        map.put("tableName",tableName);
-        map.put("primaryKeyColumn",primaryKeyColumn);
-        map.put("doClassName",doClassName);
-        map.put("daoClassName",daoClassName);
-        map.put("haveGmtModified",haveKey(columnList, "gmt_modified"));
-        map.put("haveIsDeleted",haveKey(columnList,"is_deleted"));
-        map.put("haveDeleted",haveKey(columnList, "deleted"));
-        map.put("deleteKey",deleteKey(columnList));
-        map.put("columnList",columnList);
+        Map<String, Object> map = initMap();
+        map.put("tableName", tableName);
+        map.put("primaryKeyColumn", primaryKeyColumn);
+        map.put("doClassName", doClassName);
+        map.put("daoClassName", daoClassName);
+        map.put("haveGmtModified", haveKey(columnList, "gmt_modified"));
+        map.put("haveIsDeleted", haveKey(columnList, "is_deleted"));
+        map.put("haveDeleted", haveKey(columnList, "deleted"));
+        map.put("deleteKey", deleteKey(columnList));
+        map.put("columnList", columnList);
         map.put("columnQueryList", columnQueryList);
         map.put("encoding", Env.encodeTo.name());
         Setting setting = SettingManager.get();
@@ -39,10 +35,10 @@ public class JavaSqlmapGenerator extends BaseGenerator implements SqlmapGenerato
         return generate(map);
     }
 
-    private boolean haveKey(List<Column> columnList,String name) {
-        if(columnList!=null && columnList.size()>0) {
+    private boolean haveKey(List<Column> columnList, String name) {
+        if (columnList != null && columnList.size() > 0) {
             for (Column c : columnList) {
-                if(c.getName().equals(name)){
+                if (c.getName().equals(name)) {
                     return true;
                 }
             }
@@ -51,9 +47,9 @@ public class JavaSqlmapGenerator extends BaseGenerator implements SqlmapGenerato
     }
 
     private String deleteKey(List<Column> columnList) {
-        if(columnList!=null && columnList.size()>0) {
+        if (columnList != null && columnList.size() > 0) {
             for (Column c : columnList) {
-                if(deleteKeyList.contains(c.getName())){
+                if (deleteKeyList.contains(c.getName())) {
                     return c.getName();
                 }
             }

@@ -13,10 +13,6 @@ import cn.fishy.plugin.idea.auto.util.PathHolder;
 
 import java.util.List;
 
-/**
- * User: duxing
- * Date: 2015.08.14 0:17
- */
 public class GeneratorAdaptor {
     private String tableName;
     private String path;
@@ -30,18 +26,18 @@ public class GeneratorAdaptor {
     public GeneratorAdaptor() {
     }
 
-    public GeneratorAdaptor(String tableName,String path, String code) {
-        if(!path.endsWith(Env.sp) && !path.endsWith("/")){
-            path+="/";
+    public GeneratorAdaptor(String tableName, String path, String code) {
+        if (!path.endsWith(Env.sp) && !path.endsWith("/")) {
+            path += "/";
         }
-        path = path.replaceAll("\\"+Env.sp,"/");
+        path = path.replaceAll(String.format("\\%s", Env.sp), "/");
         this.tableName = tableName;
         this.code = code;
         this.path = path;
-        PathHolder.init(path,Code.get(code));
-        if(code.equals("JAVA")){
+        PathHolder.init(path, Code.get(code));
+        if ("JAVA".equals(code)) {
             setGenerator(new JavaGenerator());
-        }else if(code.equals("SCALA")){
+        } else if ("SCALA".equals(code)) {
             setGenerator(new ScalaGenerator());
         }
     }
@@ -60,139 +56,146 @@ public class GeneratorAdaptor {
     }
 
 
-
     private String path(GenerateType generateType) {
-        String ph = PathHolder.resourcesPath+generateType.getPath();
-        if(TypePath.SRC.equals(generateType.getTypePath())) {
-            ph =path+generateType.getPath();
-        }else if(TypePath.RESOURCES.equals(generateType.getTypePath())){
-            ph = PathHolder.resourcesPath+generateType.getPath();
+        String ph = PathHolder.resourcesPath + generateType.getPath();
+        if (TypePath.SRC.equals(generateType.getTypePath())) {
+            ph = path + generateType.getPath();
+        } else if (TypePath.RESOURCES.equals(generateType.getTypePath())) {
+            ph = PathHolder.resourcesPath + generateType.getPath();
         }
         return ph;
     }
 
-    public static String getJavaPath(String scalaPath) {
+    private static String getJavaPath(String scalaPath) {
         String markScala = "/src/main/scala";
         String markJava = "/src/main/java";
         int i = scalaPath.indexOf(markScala);
-        if(i>-1){
+        if (i > -1) {
             return scalaPath.replace(markScala, markJava);
-        }else{
-            return scalaPath.replaceAll("\\/scala\\/", "/java/");
         }
+        return scalaPath.replaceAll("/scala/", "/java/");
     }
+
     public boolean generateBaseDAO() {
         String name = GenerateType.BaseDAO.getSuffix();
         String path = path(GenerateType.BaseDAO);
         String s = generator.generateBaseDAO();
-        if(Code.SCALA.equals(Code.get(code))){
+        if (Code.SCALA.equals(Code.get(code))) {
             path = getJavaPath(path);
             name = name + Code.JAVA.getExt();
-        }else{
+        } else {
             name = addExt(name);
         }
-        return FileWriter.write(path,name,r(s));
+        return FileWriter.write(path, name, r(s));
     }
 
     public boolean generateBaseQuery() {
         String name = GenerateType.BaseQuery.getSuffix();
         String path = path(GenerateType.BaseQuery);
         String s = generator.generateBaseQuery();
-        if(Code.SCALA.equals(Code.get(code))){
+        if (Code.SCALA.equals(Code.get(code))) {
             path = getJavaPath(path);
             name = name + Code.JAVA.getExt();
-        } else{
+        } else {
             name = addExt(name);
         }
-        return FileWriter.write(path,name,r(s));
+        return FileWriter.write(path, name, r(s));
     }
 
-    public boolean generateDO(){
+    public boolean generateDO() {
         String name = name(GenerateType.DO);
         String path = path(GenerateType.DO);
         String s = generator.generateDO(name, getDoColumnList());
-        return FileWriter.write(path,addExt(name),r(s));
+        return FileWriter.write(path, addExt(name), r(s));
     }
 
-    public boolean generateDAO(){
+    public boolean generateDAO() {
         String name = name(GenerateType.DAO);
         String path = path(GenerateType.DAO);
         String s = generator.generateDAO(name(GenerateType.DO), name(GenerateType.Query), name, primaryColumn);
         return FileWriter.write(path, addExt(name), r(s));
     }
-    public boolean generateDAOImpl(){
+
+    public boolean generateDAOImpl() {
         String name = name(GenerateType.DAOImpl);
         String path = path(GenerateType.DAOImpl);
         String s = generator.generateDAOImpl(name(GenerateType.DO), name(GenerateType.Query), name(GenerateType.DAO), name, primaryColumn, tableName);
-        return FileWriter.write(path,addExt(name),r(s));
+        return FileWriter.write(path, addExt(name), r(s));
     }
-    public boolean generateQuery(){
+
+    public boolean generateQuery() {
         String name = name(GenerateType.Query);
         String path = path(GenerateType.Query);
         String s = generator.generateQuery(name, getQueryColumnList());
-        return FileWriter.write(path,addExt(name),r(s));
+        return FileWriter.write(path, addExt(name), r(s));
     }
-    public boolean generateBO(){
+
+    public boolean generateBO() {
         String name = name(GenerateType.BO);
         String path = path(GenerateType.BO);
         String s = generator.generateBO(name, getDoColumnList());
-        return FileWriter.write(path,addExt(name),r(s));
+        return FileWriter.write(path, addExt(name), r(s));
     }
-    public boolean generateManager(){
+
+    public boolean generateManager() {
         String name = name(GenerateType.Manager);
         String path = path(GenerateType.Manager);
         Setting setting = SettingManager.get();
-        String s = generator.generateManager(setting.isManagerUseBO()?name(GenerateType.BO) : name(GenerateType.DO), name(GenerateType.Query), name, primaryColumn);
-        return FileWriter.write(path,addExt(name),r(s));
+        String s = generator.generateManager(setting.isManagerUseBO() ? name(GenerateType.BO) : name(GenerateType.DO), name(GenerateType.Query), name, primaryColumn);
+        return FileWriter.write(path, addExt(name), r(s));
     }
-    public boolean generateManagerImpl(){
+
+    public boolean generateManagerImpl() {
         String name = name(GenerateType.ManagerImpl);
         String path = path(GenerateType.ManagerImpl);
         String s = generator.generateManagerImpl(name(GenerateType.DO), name(GenerateType.BO), name(GenerateType.Query), name(GenerateType.Transfer), name(GenerateType.DAO), name(GenerateType.Manager), name, primaryColumn);
-        return FileWriter.write(path,addExt(name),r(s));
+        return FileWriter.write(path, addExt(name), r(s));
     }
-    public boolean generateTransfer(){
+
+    public boolean generateTransfer() {
         String name = name(GenerateType.Transfer);
         String path = path(GenerateType.Transfer);
         String s = generator.generateTransfer(name(GenerateType.DO), name(GenerateType.BO), name(GenerateType.Transfer), doColumnList);
         return FileWriter.write(path, addExt(name), r(s));
     }
-    public boolean generateSqlmap(){
+
+    public boolean generateSqlmap() {
         String name = name(GenerateType.SQLMap);
         String path = path(GenerateType.SQLMap);
         String s = generator.generateSqlmap(tableName, primaryColumn, name(GenerateType.DO), name(GenerateType.DAO), doColumnList, queryColumnList);
-        return FileWriter.write(path, addExtXml(name),r(s));
+        return FileWriter.write(path, addExtXml(name), r(s));
     }
 
     public boolean generateDAOXml() {
         String name = GenerateType.DAOXml.getSuffix();
         String path = path(GenerateType.DAOXml);
-        String s = generator.generateDAOXml(name(GenerateType.DAO),name(GenerateType.DAOImpl));
-        return FileWriter.write(path,addExtXml(name),r(s));
+        String s = generator.generateDAOXml(name(GenerateType.DAO), name(GenerateType.DAOImpl));
+        return FileWriter.write(path, addExtXml(name), r(s));
     }
 
     public boolean generateSQLMapConfigXml() {
         String name = GenerateType.SQLMapConfigXml.getSuffix();
         String path = path(GenerateType.SQLMapConfigXml);
         String s = generator.generateSQLMapConfigXml(tableName);
-        return FileWriter.write(path,addExtXml(name),r(s));
+        return FileWriter.write(path, addExtXml(name), r(s));
     }
 
     public boolean generatePersistenceXml() {
         String name = GenerateType.PersistenceXml.getSuffix();
         String path = path(GenerateType.PersistenceXml);
         String s = generator.generatePersistenceXml(tableName);
-        return FileWriter.write(path,addExtXml(name),r(s));
+        return FileWriter.write(path, addExtXml(name), r(s));
     }
 
     public String name(GenerateType type) {
         return NameUtil.name(this.tableName, type);
     }
-    public String addExt(String name) {
+
+    private String addExt(String name) {
         return name + Code.get(code).getExt();
     }
 
-    public String addExtXml(String name) {
+    private String addExtXml(String name) {
         return name + ".xml";
     }
 
@@ -220,7 +223,7 @@ public class GeneratorAdaptor {
         return code;
     }
 
-    public List<Column> getDoColumnList() {
+    private List<Column> getDoColumnList() {
         return doColumnList;
     }
 
@@ -228,7 +231,7 @@ public class GeneratorAdaptor {
         return primaryColumn;
     }
 
-    public List<Column> getQueryColumnList() {
+    private List<Column> getQueryColumnList() {
         return queryColumnList;
     }
 
@@ -249,14 +252,18 @@ public class GeneratorAdaptor {
     }
 
 
-    public byte[] r(String s){
-        if(s==null)return null;
+    private byte[] r(String s) {
+        if (s == null) {
+            return null;
+        }
         return s.getBytes(Env.encodeTo);
     }
 
-    public String s(String s){
-        if(s==null)return null;
-        return new String(s.getBytes(Env.encodeTo),Env.encodeFrom);
+    public String s(String s) {
+        if (s == null) {
+            return null;
+        }
+        return new String(s.getBytes(Env.encodeTo), Env.encodeFrom);
     }
 
     public static void main(String[] args) throws Exception {

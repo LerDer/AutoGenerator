@@ -6,10 +6,6 @@ import cn.fishy.plugin.idea.auto.generator.BaseGenerator;
 
 import java.util.Map;
 
-/**
- * User: duxing
- * Date: 2015.08.14 23:24
- */
 public class JavaBaseQueryGenerator extends BaseGenerator {
 
     @Override

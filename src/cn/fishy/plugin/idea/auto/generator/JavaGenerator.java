@@ -18,10 +18,6 @@ import cn.fishy.plugin.idea.auto.generator.java.JavaTransferGenerator;
 
 import java.util.List;
 
-/**
- * User: duxing
- * Date: 2015.08.13 23:33
- */
 public class JavaGenerator extends CodeAbstractGenerator {
     @Override
     public String space() {
@@ -35,12 +31,12 @@ public class JavaGenerator extends CodeAbstractGenerator {
 
     @Override
     public String generateDAO(String doClassName, String queryClassName, String daoClassName, Column primaryKeyColumn) {
-        return new JavaDaoGenerator().generate(doClassName, queryClassName,daoClassName,primaryKeyColumn);
+        return new JavaDaoGenerator().generate(doClassName, queryClassName, daoClassName, primaryKeyColumn);
     }
 
     @Override
     public String generateDAOImpl(String doClassName, String queryClassName, String daoClassName, String daoImplClassName, Column primaryKeyColumn, String tableName) {
-        return new JavaDaoImplGenerator().generate(doClassName, queryClassName,daoClassName,daoImplClassName, primaryKeyColumn,tableName);
+        return new JavaDaoImplGenerator().generate(doClassName, queryClassName, daoClassName, daoImplClassName, primaryKeyColumn, tableName);
     }
 
     @Override
@@ -55,12 +51,12 @@ public class JavaGenerator extends CodeAbstractGenerator {
 
     @Override
     public String generateManager(String objClassName, String queryClassName, String managerClassName, Column primaryKeyColumn) {
-        return new JavaManagerGenerator().generate(objClassName, queryClassName,managerClassName,primaryKeyColumn);
+        return new JavaManagerGenerator().generate(objClassName, queryClassName, managerClassName, primaryKeyColumn);
     }
 
     @Override
     public String generateManagerImpl(String doClassName, String boClassName, String queryClassName, String transferClassName, String daoClassName, String managerClassName, String managerImplClassName, Column primaryKeyColumn) {
-        return new JavaManagerImplGenerator().generate(doClassName, boClassName, queryClassName,transferClassName, daoClassName, managerClassName, managerImplClassName, primaryKeyColumn);
+        return new JavaManagerImplGenerator().generate(doClassName, boClassName, queryClassName, transferClassName, daoClassName, managerClassName, managerImplClassName, primaryKeyColumn);
     }
 
     @Override
@@ -85,7 +81,7 @@ public class JavaGenerator extends CodeAbstractGenerator {
 
     @Override
     public String generateDAOXml(String daoClassName, String daoImplClassName) {
-        return new JavaDAOXmlGenerator().generate(daoClassName,daoImplClassName);
+        return new JavaDAOXmlGenerator().generate(daoClassName, daoImplClassName);
     }
 
     @Override

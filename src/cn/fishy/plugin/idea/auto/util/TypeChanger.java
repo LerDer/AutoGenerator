@@ -2,16 +2,13 @@ package cn.fishy.plugin.idea.auto.util;
 
 import java.util.HashMap;
 
-/**
- * User: duxing
- * Date: 2015.08.13 23:26
- */
 public class TypeChanger {
 
-    public static HashMap<String, String> typeMap = new HashMap<String, String>();
+    private static HashMap<String, String> typeMap = new HashMap<>();
+
     static {
-        /**
-         * mysql
+        /*
+          mysql
          */
         typeMap.put("TINYINT", "Integer");
         typeMap.put("SMALLINT", "Integer");
@@ -45,20 +42,22 @@ public class TypeChanger {
         typeMap.put("LONGBLOB", "Object");
         typeMap.put("ENUM", "String");
         typeMap.put("SET", "String");
-        /**
-         * oracle
+        /*
+          oracle
          */
         typeMap.put("NUMBER", "Long");
         typeMap.put("RAW", "String");
     }
 
-    public static String clean(String typeStr){
-        return typeStr.replaceAll("\\(.*\\)*","").toUpperCase();
+    public static String clean(String typeStr) {
+        return typeStr.replaceAll("\\(.*\\)*", "").toUpperCase();
     }
 
-    public static String getType(String typeStr){
+    public static String getType(String typeStr) {
         String type = typeMap.get(typeStr);
-        if(type==null)type="String";
+        if (type == null) {
+            type = "String";
+        }
         return type;
     }
 }

@@ -9,11 +9,6 @@ import com.intellij.openapi.components.StorageScheme;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * User: duxing
- * Date: 2015.8.11
- */
-
 @com.intellij.openapi.components.State(
         name = "PluginProjectConfig",
         storages = {
@@ -22,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
         }
 )
 public class PluginProjectConfigHolder implements PersistentStateComponent<PluginProjectConfig> {
-    public PluginProjectConfig pluginProjectConfig = new PluginProjectConfig();
+    private PluginProjectConfig pluginProjectConfig = new PluginProjectConfig();
 
     @Nullable
     @Override
@@ -37,10 +32,12 @@ public class PluginProjectConfigHolder implements PersistentStateComponent<Plugi
 
     @Nullable
     public static PluginProjectConfig getPluginProjectConfig() {
-        if(Env.project==null)return null;
+        if (Env.project == null) {
+            return null;
+        }
         try {
             return ServiceManager.getService(Env.project, PluginProjectConfigHolder.class).getState();
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

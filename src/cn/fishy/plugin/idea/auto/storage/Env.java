@@ -9,10 +9,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.nio.charset.Charset;
 
-/**
- * User: duxing
- * Date: 2015-08-15 14:49
- */
 public class Env {
     public static String sp = System.getProperty("file.separator");
     public static Project project;
@@ -24,10 +20,10 @@ public class Env {
     public static Charset getProjectCharset() {
         try {
             return EncodingProjectManager.getInstance(project).getDefaultCharset();
-        }catch (Exception e){
-            try{
+        } catch (Exception e) {
+            try {
                 return Env.project.getBaseDir().getCharset();
-            }catch (Exception e1){
+            } catch (Exception e1) {
                 return Charset.forName("UTF-8");
             }
         }
@@ -38,10 +34,10 @@ public class Env {
         Charset ideCharset;
         try {
             ideCharset = EncodingManager.getInstance().getDefaultCharset();
-        }catch (Exception e){
+        } catch (Exception e) {
             try {
                 ideCharset = CharsetToolkit.getDefaultSystemCharset();
-            }catch (Exception e1){
+            } catch (Exception e1) {
                 ideCharset = Charset.forName("UTF-8");
             }
         }
@@ -52,7 +48,7 @@ public class Env {
     public static Charset getCharsetFromEncoding(String encoding) {
         try {
             return Charset.forName(encoding);
-        }catch (Exception e){
+        } catch (Exception e) {
             return Charset.defaultCharset();
         }
     }

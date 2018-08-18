@@ -10,10 +10,6 @@ import cn.fishy.plugin.idea.auto.util.NameUtil;
 
 import java.util.Map;
 
-/**
- * User: duxing
- * Date: 2015-08-17 00:39
- */
 public class JavaPersistenceXmlGenerator extends BaseGenerator implements PersistenceXmlGenerator {
 
     @Override
@@ -28,8 +24,8 @@ public class JavaPersistenceXmlGenerator extends BaseGenerator implements Persis
 
     @Override
     public String generate(String tableName) {
-        Map<String,Object> map = initMap();
-        map.put("tableName",tableName);
+        Map<String, Object> map = initMap();
+        map.put("tableName", tableName);
         map.put("tablePropertyName", NameUtil.propertyName(tableName));
         Setting setting = SettingManager.get();
         map.put("encoding", setting.getEncoding());
