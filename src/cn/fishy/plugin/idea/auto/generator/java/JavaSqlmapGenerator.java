@@ -25,9 +25,9 @@ public class JavaSqlmapGenerator extends BaseGenerator implements SqlmapGenerato
         map.put("primaryKeyColumn",primaryKeyColumn);
         map.put("doClassName",doClassName);
         map.put("daoClassName",daoClassName);
-        map.put("haveGmtModified",haveKey(columnList, "GMT_MODIFIED"));
-        map.put("haveIsDeleted",haveKey(columnList,"IS_DELETED"));
-        map.put("haveDeleted",haveKey(columnList, "DELETED"));
+        map.put("haveGmtModified",haveKey(columnList, "gmt_modified"));
+        map.put("haveIsDeleted",haveKey(columnList,"is_deleted"));
+        map.put("haveDeleted",haveKey(columnList, "deleted"));
         map.put("deleteKey",deleteKey(columnList));
         map.put("columnList",columnList);
         map.put("columnQueryList", columnQueryList);

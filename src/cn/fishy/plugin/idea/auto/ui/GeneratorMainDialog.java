@@ -596,7 +596,7 @@ public class GeneratorMainDialog extends JDialog {
             if(a){
                 try {
                     Column c = new Column();
-                    c.setName(((String) tm.getValueAt(i, ColumnEnum.Column.getOrder())).toUpperCase());
+                    c.setName(((String) tm.getValueAt(i, ColumnEnum.Column.getOrder())).toLowerCase());
                     c.setProperty((String) tm.getValueAt(i, ColumnEnum.ClassProperty.getOrder()));
                     c.setType((String) tm.getValueAt(i, ColumnEnum.CodeType.getOrder()));
                     c.setIsPrimaryKey("Y".equals((String) tm.getValueAt(i, ColumnEnum.Primary.getOrder())));

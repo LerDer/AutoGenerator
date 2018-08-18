@@ -11,8 +11,10 @@
 
     <sql id="base_column">
 #set($i = 0)
-#foreach($!{column} in $!{columnList})
-        #if($i==0)#else,#end${column.name}
+#set($size = $!{columnList.size()})
+    #foreach($!{column} in $!{columnList})
+        ${column.name}#if($i + 1 == $size)#else,#end
+
 #set($i = $i + 1)
 #end
     </sql>
@@ -22,8 +24,10 @@
         <include refid="base_column"/>
         )VALUES(
 #set($i = 0)
+#set($size = $!{columnList.size()})
 #foreach($!{column} in $!{columnList})
-            #if($i==0) #else,#end#if("$column.name"=="gmt_modified" || "$column.name"=="gmt_create"|| "$column.name"=="gmt_created")now()#elseif("$column.name"=="is_deleted" ||  "$column.name"=="deleted") 0 #else#{${column.property}}
+    #if("$column.name"=="gmt_modified" || "$column.name"=="gmt_create"|| "$column.name"=="gmt_created")now()#elseif("$column.name"=="is_deleted" ||  "$column.name"=="deleted") 0 #else#{${column.property}}#if($i + 1 == $size)#else,#end
+
 #end
 #set($i = $i + 1)
 #end
