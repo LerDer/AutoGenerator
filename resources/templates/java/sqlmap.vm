@@ -99,8 +99,8 @@
         </where>
 #if($pagerQuery)
         ORDER BY ${primaryKeyColumn.name} DESC
-    <if test= "start != null">
-        LIMIT #{start}, #{limit}
+    <if test= "page != null">
+        LIMIT #{(page-1) * pageSize}, #{pageSize}
     </if>
 #end
     </select>
