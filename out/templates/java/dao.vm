@@ -37,7 +37,7 @@ public interface ${className}{
      * @param ${primaryKeyName} key
      * @return obj obj
      */
-    public ${objClassName} get(${primaryKeyType} ${primaryKeyName});
+    public ${objClassName} select(${primaryKeyType} ${primaryKeyName});
 
     /**
      * 查询list
