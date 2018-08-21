@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${daoClassName}">
 
-    <resultMap id="baseMap" class="${package}.${doClassName}">
+    <resultMap id="baseMap" type="${package}.${doClassName}">
 #foreach($!{column} in $!{columnList})
         <result property="${column.property}" column="${column.name}"/>
 #end
@@ -28,7 +28,7 @@
         #end
 </sql>
 
-    <insert id="insert" parameterClass="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="id">
 	    INSERT INTO ${tableName} (
         <include refid="no_id_column"/>
         )VALUES(
@@ -41,7 +41,7 @@
         )
 
 #if($daoUseSequence)#else
-        <selectKey resultClass="${primaryKeyColumn.type}" keyProperty="${primaryKeyColumn.property}" >
+        <selectKey resultType="${primaryKeyColumn.type}" keyProperty="${primaryKeyColumn.property}" >
             SELECT @@IDENTITY AS ${primaryKeyColumn.name}
         </selectKey>
 #end
@@ -105,7 +105,7 @@
 #end
     </select>
 
-    <select id="getCount" resultClass="int">
+    <select id="getCount" resultType="int">
         SELECT
         COUNT(1)
         FROM ${tableName}
