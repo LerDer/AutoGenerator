@@ -28,7 +28,7 @@
         #end
 </sql>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="${primaryKeyColumn.property}">
 	    INSERT INTO ${tableName} (
         <include refid="no_id_column"/>
         )VALUES(

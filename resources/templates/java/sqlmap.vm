@@ -28,7 +28,7 @@
         #end
 </sql>
 
-    <insert id="insert" parameterType="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="${primaryKeyColumn.property}">
 	    INSERT INTO ${tableName} (
         <include refid="no_id_column"/>
         )VALUES(
@@ -82,13 +82,13 @@
 #foreach($!{column} in $!{columnQueryList})
 #if("$column.name"=="is_deleted"|| "$column.name"=="is_delete"||"$column.name"=="deleted"||"$column.name"=="gmt_modified" || "$column.name"=="gmt_modify" ||"$column.name"=="gmt_create"||"$column.name"=="gmt_created")
     #if("$column.name"=="is_deleted")
-        AND is_deleted = 0,
+        AND is_deleted = 0
     #end
     #if("$column.name"=="is_delete")
-        AND is_delete = 0,
+        AND is_delete = 0
     #end
     #if("$column.name"=="deleted")
-        AND deleted = 0,
+        AND deleted = 0
     #end
 #else
             <if test= "${column.property} != null">
@@ -113,13 +113,13 @@
             #foreach($!{column} in $!{columnQueryList})
                 #if("$column.name"=="is_deleted"|| "$column.name"=="is_delete"||"$column.name"=="deleted"||"$column.name"=="gmt_modified" || "$column.name"=="gmt_modify" ||"$column.name"=="gmt_create"||"$column.name"=="gmt_created")
                     #if("$column.name"=="is_deleted")
-                        AND is_deleted = 0,
+                        AND is_deleted = 0
                     #end
                     #if("$column.name"=="is_delete")
-                        AND is_delete = 0,
+                        AND is_delete = 0
                     #end
                     #if("$column.name"=="deleted")
-                        AND deleted = 0,
+                        AND deleted = 0
                     #end
                 #else
                     <if test= "${column.property} != null">
