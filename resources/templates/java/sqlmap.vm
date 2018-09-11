@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${daoClassName}">
 
     <resultMap id="baseMap" type="${package}.${doClassName}">
@@ -28,7 +27,7 @@
         #end
 </sql>
 
-    <insert id="insert" parameterType="${package}.${doClassName}" useGeneratedKeys="true" keyProperty="${primaryKeyColumn.property}">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="${primaryKeyColumn.property}">
 	    INSERT INTO ${tableName} (
         <include refid="no_id_column"/>
         )VALUES(
@@ -39,7 +38,6 @@
 
             #end
         )
-
 #if($daoUseSequence)#else
         <selectKey resultType="${primaryKeyColumn.type}" keyProperty="${primaryKeyColumn.property}" >
             SELECT @@IDENTITY AS ${primaryKeyColumn.name}
@@ -51,7 +49,7 @@
         UPDATE ${tableName}
         <set>
 #foreach($!{column} in $!{columnList})
-#if("$column.name"=="gmt_modified" || "$column.name"=="gmt_modify" ||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name" || "$column.name"=="is_deleted" || "$column.name"=="is_delete")
+#if("$column.name"=="gmt_modified" || "$column.name"=="gmt_modify" ||"$column.name"=="gmt_create"||"$column.name"=="gmt_created"||"$column.name"=="$!primaryKeyColumn.name" || "$column.name"=="is_deleted" || "$column.name"=="is_delete" || "$column.name"=="deleted")
     #if("$column.name"=="gmt_modified")
         gmt_modified = now(),
     #end
